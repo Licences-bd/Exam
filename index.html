@@ -8,467 +8,86 @@
     <link rel="icon" type="image/png" href="driving-licence.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: #f0f4f8;
-            color: #1e293b;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* সরকারি স্টাইলে হেডার - এক লাইন */
-        .gov-header {
-            background: linear-gradient(135deg, #006A4E, #008060);
-            color: white;
-            padding: 0.8rem 1rem;
-            text-align: center;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .gov-header span {
-            display: inline-block;
-        }
-
-        /* মেনু বার - এক লাইনে, স্ক্রলযোগ্য */
-        .menu-bar {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            justify-content: flex-start;
-            align-items: center;
-            background: white;
-            padding: 0.5rem 0.8rem;
-            gap: 0.4rem;
-            border-bottom: 2px solid #dce4ec;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            scrollbar-width: thin;
-        }
-        .menu-bar::-webkit-scrollbar {
-            height: 3px;
-        }
-        .menu-bar::-webkit-scrollbar-track {
-            background: #e2e8f0;
-        }
-        .menu-bar::-webkit-scrollbar-thumb {
-            background: #006A4E;
-            border-radius: 10px;
-        }
-        .menu-btn {
-            background: transparent;
-            border: none;
-            padding: 0.4rem 0.9rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-            color: #1e3c72;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-        .pdf-menu-btn {
-            background: #f0f9f0;
-            border: 1px solid #006A4E;
-        }
-        .pdf-menu-btn:hover {
-            background: #006A4E;
-            color: white;
-        }
-
-        /* ড্যাশবোর্ড */
-        .dashboard {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            background: white;
-            margin: 1rem;
-            padding: 0.7rem;
-            border-radius: 28px;
-            gap: 0.5rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-        }
-        .dash-card {
-            text-align: center;
-            background: #f8fafc;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            min-width: 85px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans Bengali', sans-serif; background: #f0f4f8; color: #1e293b; font-size: 14px; line-height: 1.5; }
+        .gov-header { background: linear-gradient(135deg, #006A4E, #008060); color: white; padding: 0.8rem 1rem; text-align: center; font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .menu-bar { display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; align-items: center; background: white; padding: 0.5rem 0.8rem; gap: 0.4rem; border-bottom: 2px solid #dce4ec; box-shadow: 0 2px 6px rgba(0,0,0,0.05); scrollbar-width: thin; }
+        .menu-bar::-webkit-scrollbar { height: 3px; }
+        .menu-bar::-webkit-scrollbar-track { background: #e2e8f0; }
+        .menu-bar::-webkit-scrollbar-thumb { background: #006A4E; border-radius: 10px; }
+        .menu-btn { background: transparent; border: none; padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 600; border-radius: 40px; cursor: pointer; transition: 0.2s; color: #1e3c72; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; }
+        .pdf-menu-btn { background: #f0f9f0; border: 1px solid #006A4E; }
+        .pdf-menu-btn:hover { background: #006A4E; color: white; }
+        .dashboard { display: flex; flex-wrap: wrap; justify-content: space-around; background: white; margin: 1rem; padding: 0.7rem; border-radius: 28px; gap: 0.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+        .dash-card { text-align: center; background: #f8fafc; padding: 0.4rem 0.8rem; border-radius: 20px; min-width: 85px; }
         .dash-card h4 { font-size: 0.7rem; color: #475569; }
         .dash-card p { font-size: 1.2rem; font-weight: 700; color: #006A4E; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem 2rem;
-        }
-        .page {
-            display: none;
-            animation: fade 0.2s ease;
-        }
-        .active-page {
-            display: block;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+        .page { display: none; animation: fade 0.2s ease; }
+        .active-page { display: block; }
         @keyframes fade { from { opacity:0; transform: translateY(6px);} to { opacity:1; } }
-
-        /* স্টাডি মেটেরিয়ালস */
-        .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-bottom: 1.5rem;
-        }
-        .filter-btn {
-            background: #eef2ff;
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 30px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .filter-btn.active {
-            background: #006A4E;
-            color: white;
-        }
-        .qa-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-        .qa-card {
-            background: white;
-            border-radius: 20px;
-            padding: 1.2rem;
-            border-left: 5px solid #006A4E;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .qa-question {
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 0.75rem;
-        }
-        .sign-visual {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #f1f5f9;
-            padding: 5px 12px;
-            border-radius: 40px;
-            margin: 8px 0;
-        }
-        .sign-box {
-            width: 48px;
-            height: 48px;
-            background: white;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        }
-        .options {
-            margin: 10px 0;
-        }
-        .opt {
-            padding: 5px 0;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-        .correct-ans {
-            background: #e6f7e6;
-            padding: 10px;
-            border-radius: 16px;
-            margin-top: 10px;
-            font-size: 0.85rem;
-        }
-
-        /* পরীক্ষার অংশ */
-        .exam-header {
-            background: white;
-            border-radius: 24px;
-            padding: 0.6rem 1rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-        .q-counter {
-            font-weight: 700;
-            background: #eef2ff;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-size: 1rem;
-        }
-        .timer-card {
-            background: #fee2e2;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: #b91c1c;
-        }
-        .force-finish-btn {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .question-card {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-        }
-        .q-text {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-        }
-        .exam-opt {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 60px;
-            padding: 0.7rem 1rem;
-            margin-bottom: 0.7rem;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .exam-opt.selected {
-            background: #006A4E;
-            color: white;
-            border-color: #006A4E;
-        }
-        .action-btns {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 40px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
+        .filter-group { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+        .filter-btn { background: #eef2ff; border: none; padding: 0.4rem 1rem; border-radius: 30px; font-weight: 500; cursor: pointer; }
+        .filter-btn.active { background: #006A4E; color: white; }
+        .qa-list { display: flex; flex-direction: column; gap: 1.2rem; }
+        .qa-card { background: white; border-radius: 20px; padding: 1.2rem; border-left: 5px solid #006A4E; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .qa-question { font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem; }
+        .sign-visual { display: inline-flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 5px 12px; border-radius: 40px; margin: 8px 0; }
+        .sign-box { width: 48px; height: 48px; background: white; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+        .options { margin: 10px 0; }
+        .opt { padding: 5px 0; display: flex; align-items: baseline; gap: 8px; }
+        .correct-ans { background: #e6f7e6; padding: 10px; border-radius: 16px; margin-top: 10px; font-size: 0.85rem; }
+        .exam-header { background: white; border-radius: 24px; padding: 0.6rem 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+        .q-counter { font-weight: 700; background: #eef2ff; padding: 0.3rem 1rem; border-radius: 40px; font-size: 1rem; }
+        .timer-card { background: #fee2e2; padding: 0.3rem 1.2rem; border-radius: 40px; font-weight: bold; font-size: 1.2rem; color: #b91c1c; }
+        .force-finish-btn { background: #dc2626; color: white; border: none; padding: 0.4rem 1rem; border-radius: 40px; font-weight: bold; cursor: pointer; }
+        .question-card { background: white; border-radius: 28px; padding: 1.5rem; }
+        .q-text { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.2rem; }
+        .exam-opt { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 60px; padding: 0.7rem 1rem; margin-bottom: 0.7rem; cursor: pointer; transition: 0.1s; }
+        .exam-opt.selected { background: #006A4E; color: white; border-color: #006A4E; }
+        .action-btns { display: flex; justify-content: space-between; margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap; }
+        .btn { padding: 0.6rem 1.2rem; border-radius: 40px; border: none; font-weight: bold; cursor: pointer; }
         .btn-primary { background: #006A4E; color: white; }
         .btn-danger { background: #dc2626; color: white; }
         .btn-outline { background: white; border: 1px solid #cbd5e1; }
-
-        /* মোডাল */
-        .modal {
-            display: none;
-            position: fixed;
-            top:0; left:0;
-            width:100%; height:100%;
-            background: rgba(0,0,0,0.75);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 1rem;
-        }
-        .modal-content {
-            background: white;
-            max-width: 550px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 32px;
-            padding: 1.5rem;
-            position: relative;
-        }
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #666;
-            transition: 0.2s;
-        }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75); align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .modal-content { background: white; max-width: 550px; width: 100%; max-height: 85vh; overflow-y: auto; border-radius: 32px; padding: 1.5rem; position: relative; }
+        .modal-close { position: absolute; top: 12px; right: 18px; font-size: 28px; font-weight: bold; cursor: pointer; color: #666; }
         .modal-close:hover { color: #dc2626; }
-        .score-big {
-            font-size: 2.2rem;
-            font-weight: 800;
-            text-align: center;
-            background: #f1f5f9;
-            padding: 0.6rem;
-            border-radius: 30px;
-            margin: 1rem 0;
-            color: #006A4E;
-        }
-        .wrong-item {
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0.8rem 0;
-            font-size: 0.85rem;
-        }
+        .score-big { font-size: 2.2rem; font-weight: 800; text-align: center; background: #f1f5f9; padding: 0.6rem; border-radius: 30px; margin: 1rem 0; color: #006A4E; }
+        .wrong-item { border-bottom: 1px solid #e2e8f0; padding: 0.8rem 0; font-size: 0.85rem; }
+        .apply-card { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 1rem; }
+        .steps-container { background: #f8fafc; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
+        .step-item { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #cbd5e1; }
+        .step-num { background: #006A4E; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
+        .doc-list { padding-left: 1.5rem; margin: 1rem 0; }
+        .doc-list li { margin-bottom: 0.5rem; }
 
-        /* আবেদন পাতা */
-        .apply-card {
-            background: white;
-            border-radius: 28px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .steps-container {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        .step-item {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            padding: 10px 0;
-            border-bottom: 1px dashed #cbd5e1;
-        }
-        .step-num {
-            background: #006A4E;
-            color: white;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        .doc-list {
-            padding-left: 1.5rem;
-            margin: 1rem 0;
-        }
-        .doc-list li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* ========== প্রফেশনাল ফুটার (আপডেটেড) ========== */
-        .professional-footer {
-            background: #0f2b2b;
-            color: #cbd5e1;
-            margin-top: 2.5rem;
-            border-top: 4px solid #f5b042;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
-            border-bottom: 1px solid #2a4b4b;
-        }
-        .footer-col h3 {
-            color: white;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            border-left: 3px solid #f5b042;
-            padding-left: 0.7rem;
-        }
-        .footer-col p, .footer-col ul {
-            font-size: 0.85rem;
-            line-height: 1.6;
-        }
-        .footer-col ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .footer-col li {
-            margin-bottom: 0.5rem;
-        }
-        .footer-col a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .footer-col a:hover {
-            color: #f5b042;
-            text-decoration: underline;
-        }
-        /* অনলাইন আবেদন বাটন */
-        .apply-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #f5b042;
-            color: #0f2b2b !important;
-            padding: 10px 20px;
-            border-radius: 40px;
-            font-weight: bold;
-            transition: 0.2s;
-            margin: 10px 0;
-        }
-        .apply-btn:hover {
-            background: #ffaa2b;
-            transform: translateY(-2px);
-            text-decoration: none !important;
-        }
-        /* ক্রেডিট কার্ড */
-        .credit-card {
-            background: #1e3a3a;
-            padding: 12px 18px;
-            border-radius: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-            border-left: 3px solid #f5b042;
-            transition: 0.2s;
-        }
-        .credit-card:hover {
-            background: #2a4f4f;
-            transform: translateY(-2px);
-        }
-        .credit-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #b9d4df;
-        }
-        .credit-name {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            background: rgba(245, 176, 66, 0.2);
-            padding: 4px 14px;
-            border-radius: 40px;
-            border: 1px solid rgba(245, 176, 66, 0.6);
-        }
-        .credit-name i {
-            margin-right: 6px;
-            color: #f5b042;
-        }
-        .credit-name span {
-            color: #f5b042;
-        }
-        .footer-bottom {
-            text-align: center;
-            padding: 1.2rem;
-            font-size: 0.75rem;
-            color: #94a3b8;
-        }
+        /* ========== প্রফেশনাল ফুটার (আপডেটেড - আইকন এক লাইনে, নাম্বার ছাড়া) ========== */
+        .professional-footer { background: #0f2b2b; color: #cbd5e1; margin-top: 2.5rem; border-top: 4px solid #f5b042; }
+        .footer-container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; border-bottom: 1px solid #2a4b4b; }
+        .footer-col h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; border-left: 3px solid #f5b042; padding-left: 0.7rem; }
+        .footer-col p, .footer-col ul { font-size: 0.85rem; line-height: 1.6; }
+        .footer-col ul { list-style: none; padding-left: 0; }
+        .footer-col li { margin-bottom: 0.5rem; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.2s; }
+        .footer-col a:hover { color: #f5b042; text-decoration: underline; }
+        .apply-btn { display: inline-flex; align-items: center; gap: 10px; background: #f5b042; color: #0f2b2b !important; padding: 10px 20px; border-radius: 40px; font-weight: bold; transition: 0.2s; margin: 10px 0; }
+        .apply-btn:hover { background: #ffaa2b; transform: translateY(-2px); text-decoration: none !important; }
+        .credit-card { background: #1e3a3a; padding: 12px 18px; border-radius: 16px; display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 15px; border-left: 3px solid #f5b042; transition: 0.2s; }
+        .credit-card:hover { background: #2a4f4f; transform: translateY(-2px); }
+        .credit-label { font-size: 13px; font-weight: 500; color: #b9d4df; }
+        .credit-name { font-size: 16px; font-weight: 700; color: #fff; background: rgba(245, 176, 66, 0.2); padding: 4px 14px; border-radius: 40px; border: 1px solid rgba(245, 176, 66, 0.6); }
+        .credit-name i { margin-right: 6px; color: #f5b042; }
+        .credit-name span { color: #f5b042; }
+        /* যোগাযোগ সেকশন - লেখা ও আইকন এক লাইনে */
+        .contact-section { margin-top: 15px; text-align: left; }
+        .contact-text { font-size: 0.85rem; color: #b9d4df; margin-bottom: 8px; }
+        .contact-icons { display: flex; gap: 15px; align-items: center; }
+        .contact-icons a { display: inline-flex; align-items: center; gap: 6px; background: #2a4f4f; padding: 6px 14px; border-radius: 40px; font-size: 0.8rem; transition: 0.2s; color: #cbd5e1; text-decoration: none; }
+        .contact-icons a:hover { background: #f5b042; color: #0f2b2b; transform: translateY(-2px); }
+        .contact-icons i { font-size: 1.1rem; }
+        .footer-bottom { text-align: center; padding: 1.2rem; font-size: 0.75rem; color: #94a3b8; }
         @media (max-width: 640px) {
             .q-text { font-size: 1rem; }
             .exam-opt { font-size: 0.85rem; }
@@ -476,9 +95,11 @@
             .gov-header { font-size: 1rem; }
             .score-big { font-size: 1.6rem; }
             .footer-container { grid-template-columns: 1fr; }
-            .credit-card { width: 100%; justify-content: center; }
+            .credit-card, .contact-icons { width: 100%; justify-content: center; }
             .footer-col { text-align: center; }
             .footer-col h3 { border-left: none; text-align: center; }
+            .contact-icons { flex-direction: row; justify-content: center; }
+            .contact-section { text-align: center; }
         }
     </style>
 </head>
@@ -488,7 +109,6 @@
     <span>🇧🇩 বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</span>
 </div>
 
-<!-- মেনু বার -->
 <div class="menu-bar">
     <button class="menu-btn" data-page="home"><i class="fas fa-home"></i> হোম</button>
     <button class="menu-btn" data-page="study"><i class="fas fa-book-open"></i> প্রশ্ন ব্যাংক</button>
@@ -504,7 +124,6 @@
 </div>
 
 <div class="container">
-    <!-- হোম পেজ -->
     <div id="homePage" class="page">
         <div style="background: white; border-radius: 28px; padding: 2rem; text-align: center;">
             <i class="fas fa-car" style="font-size: 70px; color: #006A4E;"></i>
@@ -518,7 +137,6 @@
         </div>
     </div>
 
-    <!-- স্টাডি মেটিরিয়ালস -->
     <div id="studyPage" class="page">
         <div class="filter-group">
             <button class="filter-btn active" data-filter="all">সব (৬০)</button>
@@ -529,7 +147,6 @@
         <div id="studyList" class="qa-list"></div>
     </div>
 
-    <!-- পরীক্ষা পেজ -->
     <div id="examPage" class="page">
         <div class="exam-header">
             <div class="q-counter">📋 প্রশ্ন <span id="qCounter">1</span>/<span id="totalExamQ">20</span></div>
@@ -539,7 +156,6 @@
         <div id="examContainer" class="question-card"></div>
     </div>
 
-    <!-- লাইসেন্স আবেদন পেজ -->
     <div id="applyPage" class="page">
         <div class="apply-card">
             <h2><i class="fas fa-id-card"></i> ড্রাইভিং লাইসেন্স আবেদন - প্রয়োজনীয় ডকুমেন্ট ও পদ্ধতি</h2>
@@ -588,10 +204,9 @@
     </div>
 </div>
 
-<!-- ========== প্রফেশনাল ফুটার (আপডেটেড - বাটন ও ভালো ভাষা) ========== -->
+<!-- ========== প্রফেশনাল ফুটার (আইকন এক লাইনে, নাম্বার ছাড়া) ========== -->
 <footer class="professional-footer">
     <div class="footer-container">
-        <!-- কলাম ১: অনলাইন আবেদন বাটন -->
         <div class="footer-col">
             <h3><i class="fas fa-id-card"></i> অনলাইনে লাইসেন্স আবেদন</h3>
             <a href="https://bsp.brta.gov.bd/login" target="_blank" class="apply-btn">
@@ -603,18 +218,17 @@
             </p>
         </div>
 
-        <!-- কলাম ২: গুরুত্বপূর্ণ লিংক -->
         <div class="footer-col">
             <h3><i class="fas fa-link"></i> গুরুত্বপূর্ণ লিংক</h3>
             <ul>
                 <li><a href="https://brta.gov.bd" target="_blank">বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (BRTA)</a></li>
                 <li><a href="https://bsp.brta.gov.bd/login" target="_blank">লাইসেন্স আবেদন পোর্টাল (bsp.brta.gov.bd)</a></li>
+                <li><a href="#">ড্রাইভিং লাইসেন্স ফি কাঠামো</a></li>
                 <li><a href="#">ট্রাফিক সাইন গাইড (PDF)</a></li>
                 <li><a href="#">প্রশ্ন ব্যাংক ডাউনলোড</a></li>
             </ul>
         </div>
 
-        <!-- কলাম ৩: মন্ত্রণালয় ও নির্মাতা (ভালো ভাষা) -->
         <div class="footer-col">
             <h3><i class="fas fa-building"></i> সড়ক পরিবহন ও সেতু মন্ত্রণালয়</h3>
             <p>বাংলাদেশ সচিবালয়, ঢাকা-১০০০</p>
@@ -624,6 +238,18 @@
                 <span class="credit-label">🔧 প্রণয়ন ও ডিজাইন করেছেন</span>
                 <div class="credit-name">
                     <i class="fas fa-laptop-code"></i> <span>সুইট বয় নয়ন</span>
+                </div>
+            </div>
+            <!-- যোগাযোগ সেকশন: লেখা + এক লাইনে আইকন -->
+            <div class="contact-section">
+                <div class="contact-text">📞 কোন ওয়েবসাইট বা সমস্যার জন্য নক করুন</div>
+                <div class="contact-icons">
+                    <a href="https://wa.me/8801757827996" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://www.facebook.com/share/1E3hC9kFHj/" target="_blank">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
                 </div>
             </div>
         </div>
@@ -646,7 +272,7 @@
 </div>
 
 <script>
-// ---------- ৬০টি প্রশ্ন (আগের মতোই, সংক্ষেপে দেওয়া হলো) ----------
+// ৬০টি প্রশ্ন (পূর্ণ - আগের মতোই, সংক্ষেপে দিচ্ছি কিন্তু আপনার মূল কোডে পূর্ণ ছিল)
 const allQuestions = [
     { id:1, text:"কুলিং ফ্যানের কাজ কী?", options:["রেডিয়েটরের পানি ঠান্ডা করা","ইঞ্জিন অয়েল ঠান্ডা করা","ব্রেক অয়েল ঠান্ডা করা","ব্যাটারি ঠান্ডা করা"], correct:0, category:"mechanism", signType:null },
     { id:2, text:"টেম্পারেচার গেজ ইঞ্জিনের কী নির্দেশ করে?", options:["ইঞ্জিনের কার্যকরী তাপমাত্রা","গিয়ার বক্সের তাপমাত্রা","রেডিয়েটরের তাপমাত্রা","গাড়ির বাতাসের তাপমাত্রা"], correct:0, category:"mechanism", signType:null },
@@ -752,7 +378,6 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     });
 });
 
-// EXAM LOGIC
 let examQuestions = [], examAnswers = [], currentExamIndex = 0, examTimerInterval = null, examActive = false, timeLeft = 20;
 function startExam() {
     const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
@@ -837,13 +462,9 @@ function closeModal() { document.getElementById('resultModal').style.display = '
 document.getElementById('closeModalX').addEventListener('click', closeModal);
 document.getElementById('closeModalBtn').addEventListener('click', closeModal);
 
-// PDF ওপেন ফাংশন
-function openTrafficSignPdf() {
-    window.open('icondriving.pdf', '_blank');
-}
+function openTrafficSignPdf() { window.open('icondriving.pdf', '_blank'); }
 document.getElementById('openPdfBtn').addEventListener('click', openTrafficSignPdf);
 
-// navigation
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
     document.getElementById(pageId+'Page').classList.add('active-page');
