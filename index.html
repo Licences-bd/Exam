@@ -37,49 +37,47 @@
             display: inline-block;
         }
 
-        /* মেনু বার - সম্পূর্ণ দৃশ্যমান, ছোট ফন্ট, মোড়ানো */
-        
         /* মেনু বার - এক লাইনে, স্ক্রলযোগ্য */
-.menu-bar {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
-    align-items: center;
-    background: white;
-    padding: 0.5rem 0.8rem;
-    gap: 0.4rem;
-    border-bottom: 2px solid #dce4ec;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    scrollbar-width: thin;
-}
-.menu-bar::-webkit-scrollbar {
-    height: 3px;
-}
-.menu-bar::-webkit-scrollbar-track {
-    background: #e2e8f0;
-}
-.menu-bar::-webkit-scrollbar-thumb {
-    background: #006A4E;
-    border-radius: 10px;
-}
-.menu-btn {
-    background: transparent;
-    border: none;
-    padding: 0.4rem 0.9rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: #1e3c72;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    flex-shrink: 0;
-}        /* ট্রাফিক চিহ্ন বাটনটি আলাদা রং দেয়া যেতে পারে */
+        .menu-bar {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            justify-content: flex-start;
+            align-items: center;
+            background: white;
+            padding: 0.5rem 0.8rem;
+            gap: 0.4rem;
+            border-bottom: 2px solid #dce4ec;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            scrollbar-width: thin;
+        }
+        .menu-bar::-webkit-scrollbar {
+            height: 3px;
+        }
+        .menu-bar::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        .menu-bar::-webkit-scrollbar-thumb {
+            background: #006A4E;
+            border-radius: 10px;
+        }
+        .menu-btn {
+            background: transparent;
+            border: none;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #1e3c72;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
         .pdf-menu-btn {
             background: #f0f9f0;
             border: 1px solid #006A4E;
@@ -198,7 +196,7 @@
             font-size: 0.85rem;
         }
 
-        /* পরীক্ষার অংশ - কমপ্যাক্ট হেডার */
+        /* পরীক্ষার অংশ */
         .exam-header {
             background: white;
             border-radius: 24px;
@@ -277,7 +275,7 @@
         .btn-danger { background: #dc2626; color: white; }
         .btn-outline { background: white; border: 1px solid #cbd5e1; }
 
-        /* মোডাল - উপরে ডান পাশে ক্লোজ বাটন */
+        /* মোডাল */
         .modal {
             display: none;
             position: fixed;
@@ -366,60 +364,110 @@
             margin-bottom: 0.5rem;
         }
 
-        /* ফুটার */
-        .footer {
-            background: #0f172a;
+        /* ========== প্রফেশনাল ফুটার (আপডেটেড) ========== */
+        .professional-footer {
+            background: #0f2b2b;
             color: #cbd5e1;
             margin-top: 2.5rem;
+            border-top: 4px solid #f5b042;
         }
-        .footer-top {
+        .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1.5rem 1.5rem;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid #2a4b4b;
         }
-        .footer-section h3 {
+        .footer-col h3 {
             color: white;
             font-size: 1.1rem;
             margin-bottom: 1rem;
-            border-left: 3px solid #006A4E;
+            border-left: 3px solid #f5b042;
             padding-left: 0.7rem;
         }
-        .footer-section p, .footer-section ul {
+        .footer-col p, .footer-col ul {
             font-size: 0.85rem;
             line-height: 1.6;
         }
-        .footer-section ul {
+        .footer-col ul {
             list-style: none;
             padding-left: 0;
         }
-        .footer-section li {
+        .footer-col li {
             margin-bottom: 0.5rem;
         }
-        .footer-section a {
+        .footer-col a {
             color: #cbd5e1;
             text-decoration: none;
             transition: 0.2s;
         }
-        .footer-section a:hover {
-            color: white;
+        .footer-col a:hover {
+            color: #f5b042;
             text-decoration: underline;
         }
-        .apply-steps {
-            background: rgba(0,106,78,0.2);
-            padding: 0.8rem;
+        /* অনলাইন আবেদন বাটন */
+        .apply-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5b042;
+            color: #0f2b2b !important;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: bold;
+            transition: 0.2s;
+            margin: 10px 0;
+        }
+        .apply-btn:hover {
+            background: #ffaa2b;
+            transform: translateY(-2px);
+            text-decoration: none !important;
+        }
+        /* ক্রেডিট কার্ড */
+        .credit-card {
+            background: #1e3a3a;
+            padding: 12px 18px;
             border-radius: 16px;
-            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            border-left: 3px solid #f5b042;
+            transition: 0.2s;
+        }
+        .credit-card:hover {
+            background: #2a4f4f;
+            transform: translateY(-2px);
+        }
+        .credit-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #b9d4df;
+        }
+        .credit-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(245, 176, 66, 0.2);
+            padding: 4px 14px;
+            border-radius: 40px;
+            border: 1px solid rgba(245, 176, 66, 0.6);
+        }
+        .credit-name i {
+            margin-right: 6px;
+            color: #f5b042;
+        }
+        .credit-name span {
+            color: #f5b042;
         }
         .footer-bottom {
             text-align: center;
             padding: 1.2rem;
             font-size: 0.75rem;
             color: #94a3b8;
-            border-top: 1px solid #1e293b;
         }
         @media (max-width: 640px) {
             .q-text { font-size: 1rem; }
@@ -427,7 +475,10 @@
             .menu-btn { font-size: 0.75rem; padding: 0.3rem 0.7rem; }
             .gov-header { font-size: 1rem; }
             .score-big { font-size: 1.6rem; }
-            .footer-top { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; }
+            .credit-card { width: 100%; justify-content: center; }
+            .footer-col { text-align: center; }
+            .footer-col h3 { border-left: none; text-align: center; }
         }
     </style>
 </head>
@@ -437,7 +488,7 @@
     <span>🇧🇩 বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</span>
 </div>
 
-<!-- মেনু বার: সব মেনু পরিষ্কারভাবে দৃশ্যমান -->
+<!-- মেনু বার -->
 <div class="menu-bar">
     <button class="menu-btn" data-page="home"><i class="fas fa-home"></i> হোম</button>
     <button class="menu-btn" data-page="study"><i class="fas fa-book-open"></i> প্রশ্ন ব্যাংক</button>
@@ -450,7 +501,6 @@
     <div class="dash-card"><h4>📚 মোট প্রশ্ন</h4><p id="totalQty">0</p></div>
     <div class="dash-card"><h4>✅ পাস মার্ক</h4><p>১২/২০</p></div>
     <div class="dash-card"><h4>⏱️ সময়/প্রশ্ন</h4><p>২০ সেকেন্ড</p></div>
-    <div class=" "><h4> </h4><p> </p></div>
 </div>
 
 <div class="container">
@@ -504,8 +554,8 @@
             </div>
             <div class="steps-container">
                 <h3><i class="fas fa-globe"></i> অনলাইনে আবেদন প্রক্রিয়া (BRTA)</h3>
-                <p style="margin: 0.5rem 0;"><strong>ধাপ ১:</strong> বিআরটিএর অফিসিয়াল পোর্টালে যান: <br>
-                <a href="https://brta.gov.bd" target="_blank" style="color:#006A4E; font-weight:bold;">👉 https://brta.gov.bd 👈</a> (নতুন ট্যাবে খুলবে)</p>
+                <p style="margin: 0.5rem 0;"><strong>ধাপ ১:</strong> বিআরটিএর অনলাইন পোর্টালে যান:<br>
+                <a href="https://bsp.brta.gov.bd/login" target="_blank" style="color:#006A4E; font-weight:bold;">👉 https://bsp.brta.gov.bd/login 👈</a> (নতুন ট্যাবে খুলবে)</p>
                 <p><strong>ধাপ ২:</strong> আপনার জাতীয় পরিচয়পত্রের সাথে রেজিস্টার্ড সিম নম্বর ব্যবহার করে একাউন্ট তৈরি করুন। <br>
                 <span style="background:#e0f2fe; padding:0.2rem 0.6rem; border-radius:20px;">📱 আপনার আইডি কার্ড দিয়ে তোলা সিম নাম্বার দিয়ে একাউন্ট করুন</span></p>
                 <p><strong>ধাপ ৩:</strong> আবেদন ফরম পূরণ, প্রয়োজনীয় ডকুমেন্ট আপলোড ও ফি পরিশোধ করুন।</p>
@@ -538,39 +588,49 @@
     </div>
 </div>
 
-<!-- ফুটার -->
-<footer class="footer">
-    <div class="footer-top">
-        <div class="footer-section">
-            <h3><i class="fas fa-car-side"></i> ড্রাইভিং লাইসেন্স আবেদন নির্দেশিকা</h3>
-            <div class="apply-steps">
-                <p><strong>📄 প্রয়োজনীয় ডকুমেন্ট:</strong> মেডিকেল সার্টিফিকেট, ভোটার আইডি, পাসকৃত সার্টিফিকেট, ১ কপি রঙিন ছবি (৫ সাইজ)।</p>
-                <p><strong>🌐 অনলাইন আবেদন:</strong> <a href="https://brta.gov.bd" target="_blank" style="color:#90e0ef;">brta.gov.bd</a> - এ গিয়ে আবেদন করুন।</p>
-                <p><strong>📱 একাউন্ট তৈরি:</strong> আপনার আইডি কার্ডের সাথে রেজিস্টার্ড সিম নম্বর ব্যবহার করুন।</p>
-                <p><i class="fas fa-phone-alt"></i> হটলাইন: ১৬১০০</p>
-            </div>
+<!-- ========== প্রফেশনাল ফুটার (আপডেটেড - বাটন ও ভালো ভাষা) ========== -->
+<footer class="professional-footer">
+    <div class="footer-container">
+        <!-- কলাম ১: অনলাইন আবেদন বাটন -->
+        <div class="footer-col">
+            <h3><i class="fas fa-id-card"></i> অনলাইনে লাইসেন্স আবেদন</h3>
+            <a href="https://bsp.brta.gov.bd/login" target="_blank" class="apply-btn">
+                <i class="fas fa-external-link-alt"></i> বিআরটিএ অনলাইন পোর্টালে আবেদন করুন
+            </a>
+            <p style="font-size: 0.8rem; margin-top: 10px;">
+                🔹 আবেদন করতে প্রয়োজনীয় ডকুমেন্টসহ <strong>বিআরটিএর অফিসিয়াল পোর্টালে</strong> লগইন করুন।<br>
+                🔹 নতুন ব্যবহারকারী? প্রথমে একাউন্ট তৈরি করুন (জাতীয় পরিচয়পত্র ও রেজিস্টার্ড সিম নম্বর দিয়ে)।
+            </p>
         </div>
-        <div class="footer-section">
+
+        <!-- কলাম ২: গুরুত্বপূর্ণ লিংক -->
+        <div class="footer-col">
             <h3><i class="fas fa-link"></i> গুরুত্বপূর্ণ লিংক</h3>
             <ul>
                 <li><a href="https://brta.gov.bd" target="_blank">বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (BRTA)</a></li>
-                <li><a href="#">ড্রাইভিং লাইসেন্স ফি কাঠামো</a></li>
+                <li><a href="https://bsp.brta.gov.bd/login" target="_blank">লাইসেন্স আবেদন পোর্টাল (bsp.brta.gov.bd)</a></li>
                 <li><a href="#">ট্রাফিক সাইন গাইড (PDF)</a></li>
                 <li><a href="#">প্রশ্ন ব্যাংক ডাউনলোড</a></li>
             </ul>
         </div>
-        <div class="footer-section">
+
+        <!-- কলাম ৩: মন্ত্রণালয় ও নির্মাতা (ভালো ভাষা) -->
+        <div class="footer-col">
             <h3><i class="fas fa-building"></i> সড়ক পরিবহন ও সেতু মন্ত্রণালয়</h3>
-            <p>বাংলাদেশ সচিবালয়, ঢাকা-১০০০<br>
-                    </div>
- <footer>
+            <p>বাংলাদেশ সচিবালয়, ঢাকা-১০০০</p>
+            <p><i class="fas fa-envelope"></i> info@brta.gov.bd</p>
+            <p><i class="fas fa-phone-alt"></i> হটলাইন: ১৬১০০</p>
+            <div class="credit-card">
+                <span class="credit-label">🔧 প্রণয়ন ও ডিজাইন করেছেন</span>
+                <div class="credit-name">
+                    <i class="fas fa-laptop-code"></i> <span>সুইট বয় নয়ন</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="footer-bottom">
         © ২০২৬ বাংলাদেশ ড্রাইভিং লাইসেন্স প্রস্তুতি কেন্দ্র | সকল প্রশ্ন সড়ক পরিবহন মন্ত্রণালয়ের প্রশ্ন ব্যাংক ও ট্রাফিক আইন থেকে সংগৃহীত।<br>
-        সড়ক নিরাপত্তা ও ট্রাফিক আইন মেনে চলুন | নিরাপদ ড্রাইভিং করুন, জীবন বাঁচান।<br>
-        <!-- নির্মাতার ক্রেডিট হাইলাইট সহ -->
-        <strong style="background-color: yellow; padding: 2px 4px; display: inline-block; margin-top: 5px;">
-            🛠️ নির্মাণ করেছেন: সুইট বয় নয়ন
-        </strong>
+        সড়ক নিরাপত্তা ও ট্রাফিক আইন মেনে চলুন | নিরাপদ ড্রাইভিং করুন, জীবন বাঁচান।
     </div>
 </footer>
 
@@ -586,7 +646,7 @@
 </div>
 
 <script>
-// ---------- ৬০টি প্রশ্ন ----------
+// ---------- ৬০টি প্রশ্ন (আগের মতোই, সংক্ষেপে দেওয়া হলো) ----------
 const allQuestions = [
     { id:1, text:"কুলিং ফ্যানের কাজ কী?", options:["রেডিয়েটরের পানি ঠান্ডা করা","ইঞ্জিন অয়েল ঠান্ডা করা","ব্রেক অয়েল ঠান্ডা করা","ব্যাটারি ঠান্ডা করা"], correct:0, category:"mechanism", signType:null },
     { id:2, text:"টেম্পারেচার গেজ ইঞ্জিনের কী নির্দেশ করে?", options:["ইঞ্জিনের কার্যকরী তাপমাত্রা","গিয়ার বক্সের তাপমাত্রা","রেডিয়েটরের তাপমাত্রা","গাড়ির বাতাসের তাপমাত্রা"], correct:0, category:"mechanism", signType:null },
@@ -787,10 +847,6 @@ document.getElementById('openPdfBtn').addEventListener('click', openTrafficSignP
 function showPage(pageId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
     document.getElementById(pageId+'Page').classList.add('active-page');
-    document.querySelectorAll('.menu-btn').forEach(btn => { 
-        if(btn.getAttribute('data-page') === pageId) btn.classList.add('active'); 
-        else btn.classList.remove('active'); 
-    });
     if(pageId === 'study') renderStudy('all');
     if(pageId === 'exam') startExam();
 }
