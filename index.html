@@ -4,133 +4,378 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</title>
+    
+    <!-- PWA meta tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ড্রাইভিং লাইসেন্স">
+    <link rel="apple-touch-icon" href="driving-licence.png">
+    <meta name="theme-color" content="#006A4E">
+    <link rel="manifest" href="manifest.json">
+    
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="driving-licence.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Noto Sans Bengali', sans-serif; background: #f0f4f8; color: #1e293b; font-size: 14px; line-height: 1.5; }
-        .gov-header { background: linear-gradient(135deg, #006A4E, #008060); color: white; padding: 0.8rem 1rem; text-align: center; font-size: 1.3rem; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .menu-bar { display: flex; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; justify-content: flex-start; align-items: center; background: white; padding: 0.5rem 0.8rem; gap: 0.4rem; border-bottom: 2px solid #dce4ec; box-shadow: 0 2px 6px rgba(0,0,0,0.05); scrollbar-width: thin; }
-        .menu-bar::-webkit-scrollbar { height: 3px; }
-        .menu-bar::-webkit-scrollbar-track { background: #e2e8f0; }
-        .menu-bar::-webkit-scrollbar-thumb { background: #006A4E; border-radius: 10px; }
-        .menu-btn { background: transparent; border: none; padding: 0.4rem 0.9rem; font-size: 0.85rem; font-weight: 600; border-radius: 40px; cursor: pointer; transition: 0.2s; color: #1e3c72; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; }
-        .pdf-menu-btn { background: #f0f9f0; border: 1px solid #006A4E; }
-        .pdf-menu-btn:hover { background: #006A4E; color: white; }
-        .dashboard { display: flex; flex-wrap: wrap; justify-content: space-around; background: white; margin: 1rem; padding: 0.7rem; border-radius: 28px; gap: 0.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-        .dash-card { text-align: center; background: #f8fafc; padding: 0.4rem 0.8rem; border-radius: 20px; min-width: 85px; }
-        .dash-card h4 { font-size: 0.7rem; color: #475569; }
-        .dash-card p { font-size: 1.2rem; font-weight: 700; color: #006A4E; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
-        .page { display: none; animation: fade 0.2s ease; }
-        .active-page { display: block; }
-        @keyframes fade { from { opacity:0; transform: translateY(6px);} to { opacity:1; } }
-        .filter-group { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
-        .filter-btn { background: #eef2ff; border: none; padding: 0.4rem 1rem; border-radius: 30px; font-weight: 500; cursor: pointer; }
-        .filter-btn.active { background: #006A4E; color: white; }
-        .qa-list { display: flex; flex-direction: column; gap: 1.2rem; }
-        .qa-card { background: white; border-radius: 20px; padding: 1.2rem; border-left: 5px solid #006A4E; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .qa-question { font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem; }
-        .sign-visual { display: inline-flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 5px 12px; border-radius: 40px; margin: 8px 0; }
-        .sign-box { width: 48px; height: 48px; background: white; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-        .options { margin: 10px 0; }
-        .opt { padding: 5px 0; display: flex; align-items: baseline; gap: 8px; }
-        .correct-ans { background: #e6f7e6; padding: 10px; border-radius: 16px; margin-top: 10px; font-size: 0.85rem; }
-        .exam-header { background: white; border-radius: 24px; padding: 0.6rem 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-        .q-counter { font-weight: 700; background: #eef2ff; padding: 0.3rem 1rem; border-radius: 40px; font-size: 1rem; }
-        .timer-card { background: #fee2e2; padding: 0.3rem 1.2rem; border-radius: 40px; font-weight: bold; font-size: 1.2rem; color: #b91c1c; }
-        .force-finish-btn { background: #dc2626; color: white; border: none; padding: 0.4rem 1rem; border-radius: 40px; font-weight: bold; cursor: pointer; }
-        .question-card { background: white; border-radius: 28px; padding: 1.5rem; }
-        .q-text { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.2rem; }
-        .exam-opt { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 60px; padding: 0.7rem 1rem; margin-bottom: 0.7rem; cursor: pointer; transition: 0.1s; }
-        .exam-opt.selected { background: #006A4E; color: white; border-color: #006A4E; }
-        .action-btns { display: flex; justify-content: space-between; margin-top: 1.5rem; gap: 1rem; flex-wrap: wrap; }
-        .btn { padding: 0.6rem 1.2rem; border-radius: 40px; border: none; font-weight: bold; cursor: pointer; }
-        .btn-primary { background: #006A4E; color: white; }
-        .btn-danger { background: #dc2626; color: white; }
-        .btn-outline { background: white; border: 1px solid #cbd5e1; }
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.75); align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-        .modal-content { background: white; max-width: 550px; width: 100%; max-height: 85vh; overflow-y: auto; border-radius: 32px; padding: 1.5rem; position: relative; }
-        .modal-close { position: absolute; top: 12px; right: 18px; font-size: 28px; font-weight: bold; cursor: pointer; color: #666; }
-        .modal-close:hover { color: #dc2626; }
-        .score-big { font-size: 2.2rem; font-weight: 800; text-align: center; background: #f1f5f9; padding: 0.6rem; border-radius: 30px; margin: 1rem 0; color: #006A4E; }
-        .wrong-item { border-bottom: 1px solid #e2e8f0; padding: 0.8rem 0; font-size: 0.85rem; }
-        .apply-card { background: white; border-radius: 28px; padding: 1.5rem; margin-bottom: 1rem; }
-        .steps-container { background: #f8fafc; border-radius: 20px; padding: 1rem; margin-top: 1rem; }
-        .step-item { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px dashed #cbd5e1; }
-        .step-num { background: #006A4E; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        .doc-list { padding-left: 1.5rem; margin: 1rem 0; }
-        .doc-list li { margin-bottom: 0.5rem; }
+        :root {
+            --primary: #006A4E;
+            --primary-light: #008060;
+            --primary-dark: #004d38;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --danger: #ef4444;
+            --danger-light: #f87171;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --nav-height: 62px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow: 0 2px 10px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --radius-sm: 12px;
+            --radius: 18px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+        }
 
-        /* ========== প্রফেশনাল ফুটার (আপডেটেড - আইকন এক লাইনে, নাম্বার ছাড়া) ========== */
-        .professional-footer { background: #0f2b2b; color: #cbd5e1; margin-top: 2.5rem; border-top: 4px solid #f5b042; }
-        .footer-container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; border-bottom: 1px solid #2a4b4b; }
-        .footer-col h3 { color: white; font-size: 1.1rem; margin-bottom: 1rem; border-left: 3px solid #f5b042; padding-left: 0.7rem; }
-        .footer-col p, .footer-col ul { font-size: 0.85rem; line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background: #e8edf2;
+            color: var(--text);
+            font-size: 13.5px;
+            line-height: 1.5;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 8px) + 16px);
+            min-height: 100vh;
+        }
+
+        /* ========== হেডার ========== */
+        .gov-header {
+            background: linear-gradient(135deg, #004d38 0%, #006A4E 40%, #008060 100%);
+            color: white;
+            padding: 0.55rem 0.8rem;
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 12px rgba(0,106,78,0.25);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .gov-header .flag { font-size: 1.3rem; }
+        @media (max-width:400px) {
+            .gov-header { font-size: 0.9rem; padding: 0.45rem 0.6rem; }
+        }
+
+        /* ========== ড্যাশবোর্ড ========== */
+        .dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0.6rem;
+            padding: 0.5rem 0.6rem;
+            background: var(--card);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+        .dash-card {
+            text-align: center;
+            background: #f8fafc;
+            padding: 0.35rem 0.7rem;
+            border-radius: 16px;
+            min-width: 70px;
+            flex: 1;
+            max-width: 110px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        .dash-card:hover { border-color: #dce4ec; transform: translateY(-1px); }
+        .dash-card h4 { font-size: 0.65rem; color: var(--text-light); margin-bottom: 2px; letter-spacing: 0.3px; }
+        .dash-card p { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+        @media (max-width:400px) {
+            .dashboard { gap: 0.3rem; margin: 0.3rem 0.4rem; padding: 0.4rem; }
+            .dash-card { padding: 0.25rem 0.4rem; min-width: 55px; border-radius: 12px; }
+            .dash-card h4 { font-size: 0.6rem; }
+            .dash-card p { font-size: 0.95rem; }
+        }
+
+        /* ========== কন্টেইনার ========== */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 0.5rem 0.5rem; }
+
+        .page { display: none; animation: fadeIn 0.25s ease; }
+        .active-page { display: block; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+
+        .filter-group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; padding: 0 2px; }
+        .filter-btn {
+            background: #eef2ff; border: 1.5px solid transparent; padding: 0.35rem 0.8rem;
+            border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 0.78rem;
+            transition: var(--transition); color: #475569; white-space: nowrap;
+        }
+        .filter-btn:hover { background: #dde4ff; border-color: #c7d2fe; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,106,78,0.3); font-weight: 700; }
+
+        .qa-list { display: flex; flex-direction: column; gap: 0.7rem; }
+        .qa-card {
+            background: var(--card); border-radius: var(--radius); padding: 0.8rem 1rem;
+            border-left: 4px solid var(--primary); box-shadow: var(--shadow-sm); transition: var(--transition);
+        }
+        .qa-card:hover { box-shadow: var(--shadow); }
+        .qa-question { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; color: #0f172a; }
+        .sign-visual { display: inline-flex; align-items: center; gap: 8px; background: #f1f5f9; padding: 5px 12px; border-radius: 40px; margin: 6px 0; font-size: 0.8rem; }
+        .sign-box { width: 40px; height: 40px; background: white; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.85rem; box-shadow: 0 1px 4px rgba(0,0,0,0.15); flex-shrink: 0; }
+        .options { margin: 6px 0; }
+        .opt { padding: 3px 0; display: flex; align-items: baseline; gap: 6px; font-size: 0.82rem; }
+        .opt span { font-weight: 700; color: var(--primary); min-width: 16px; }
+        .correct-ans { background: #e6f7e6; padding: 8px 12px; border-radius: 14px; margin-top: 8px; font-size: 0.8rem; border: 1px solid #c8e6c9; }
+        .correct-ans i { color: var(--primary); }
+
+        /* ========== পরীক্ষা ========== */
+        .exam-header {
+            background: var(--card); border-radius: var(--radius-lg); padding: 0.5rem 0.8rem; margin-bottom: 0.8rem;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: var(--shadow-sm);
+        }
+        .q-counter { font-weight: 700; background: #eef2ff; padding: 0.3rem 0.8rem; border-radius: 40px; font-size: 0.85rem; color: #1e3c72; }
+        .timer-card {
+            background: #fef2f2; padding: 0.3rem 0.9rem; border-radius: 40px; font-weight: 700; font-size: 1rem;
+            color: #dc2626; border: 1.5px solid #fecaca; animation: pulse 1s infinite;
+        }
+        @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:0.7; } }
+        .force-finish-btn { background: var(--danger); color: white; border: none; padding: 0.35rem 0.8rem; border-radius: 40px; font-weight: 700; cursor: pointer; font-size: 0.78rem; transition: var(--transition); white-space: nowrap; }
+        .force-finish-btn:hover { background: #dc2626; box-shadow: 0 3px 10px rgba(239,68,68,0.35); transform: translateY(-1px); }
+        .question-card { background: var(--card); border-radius: var(--radius-xl); padding: 1rem 1.1rem; box-shadow: var(--shadow); }
+        .q-text { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.8rem; color: #0f172a; line-height: 1.4; }
+        .exam-opt {
+            background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 50px; padding: 0.6rem 1rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: var(--transition); font-weight: 500; font-size: 0.85rem; user-select: none;
+        }
+        .exam-opt:hover { border-color: #bcccdc; background: #f1f5f9; transform: translateX(2px); }
+        .exam-opt.selected { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 3px 12px rgba(0,106,78,0.3); font-weight: 700; transform: scale(1.01); }
+        .action-btns { display: flex; justify-content: space-between; margin-top: 1rem; gap: 0.6rem; flex-wrap: wrap; }
+        .btn { padding: 0.55rem 1.1rem; border-radius: 40px; border: none; font-weight: 700; cursor: pointer; font-size: 0.85rem; transition: var(--transition); font-family: inherit; letter-spacing: 0.3px; }
+        .btn:active { transform: scale(0.96); }
+        .btn-primary { background: linear-gradient(135deg, #006A4E, #008060); color: white; box-shadow: 0 3px 10px rgba(0,106,78,0.3); }
+        .btn-primary:hover { box-shadow: 0 5px 16px rgba(0,106,78,0.4); transform: translateY(-1px); }
+        .btn-danger { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; box-shadow: 0 3px 10px rgba(239,68,68,0.3); }
+        .btn-outline { background: white; border: 2px solid #cbd5e1; color: #475569; }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-outline:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+        /* ========== মোডাল ========== */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index:1000; padding:1rem; backdrop-filter: blur(2px); }
+        .modal-content { background: white; max-width:500px; width:100%; max-height:85vh; overflow-y: auto; border-radius: var(--radius-xl); padding:1.2rem; position: relative; box-shadow: var(--shadow-lg); animation: modalIn 0.25s ease; }
+        @keyframes modalIn { from{ opacity:0; transform: scale(0.9) translateY(20px); } to{ opacity:1; transform: scale(1) translateY(0); } }
+        .modal-close { position: absolute; top:10px; right:16px; font-size:26px; font-weight:bold; cursor:pointer; color:#999; transition: var(--transition); width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:50%; }
+        .modal-close:hover { color:#dc2626; background:#fef2f2; }
+        .score-big { font-size:1.8rem; font-weight:800; text-align:center; background:#f1f5f9; padding:0.5rem; border-radius:24px; margin:0.8rem 0; color:var(--primary); border:2px dashed #dce4ec; }
+        .wrong-item { border-bottom:1px solid #e2e8f0; padding:0.6rem 0; font-size:0.8rem; line-height:1.5; }
+
+        /* ========== আবেদন পেজ ========== */
+        .apply-card { background: var(--card); border-radius: var(--radius-lg); padding:1rem 1.1rem; margin-bottom:0.6rem; box-shadow: var(--shadow-sm); }
+        .apply-card h2,.apply-card h3 { font-size:1rem; margin-bottom:0.5rem; color:#0f172a; }
+        .apply-card h3 { font-size:0.9rem; }
+        .doc-list { padding-left:1.2rem; margin:0.5rem 0; list-style:none; }
+        .doc-list li { margin-bottom:0.4rem; font-size:0.82rem; display:flex; align-items:flex-start; gap:6px; }
+        .steps-container { background:#f8fafc; border-radius: var(--radius); padding:0.7rem 0.9rem; margin-top:0.5rem; }
+        .step-item { display:flex; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px dashed #dce4ec; font-size:0.8rem; }
+        .step-item:last-child { border-bottom:none; }
+        .step-num { background: var(--primary); color:white; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.75rem; flex-shrink:0; }
+
+        /* ========== বটম নেভিগেশন (হালকা গোলাকার) ========== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: var(--nav-height);
+            padding: 0 4px;
+            padding-bottom: env(safe-area-inset-bottom, 4px);
+            z-index: 100;
+            border-top: 1px solid #e8ecf1;
+            box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
+            border-radius: 20px 20px 0 0;
+        }
+        .nav-item {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 3px; flex: 1; max-width: 75px; cursor: pointer; padding: 6px 2px;
+            border-radius: 16px; transition: var(--transition); position: relative;
+            border: none; background: transparent; font-family: inherit; color: #94a3b8;
+            -webkit-tap-highlight-color: transparent; user-select: none; min-height: 48px;
+        }
+        .nav-item i { font-size: 1.25rem; transition: var(--transition); position: relative; z-index: 1; }
+        .nav-item .nav-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.3px; transition: var(--transition); white-space: nowrap; }
+        .nav-item.active { color: var(--primary); }
+        .nav-item.active i { transform: translateY(-2px); filter: drop-shadow(0 2px 4px rgba(0,106,78,0.3)); }
+        .nav-item.active::before {
+            content: ''; position: absolute; top: 2px; width: 22px; height: 3px;
+            background: var(--primary); border-radius: 0 0 3px 3px; transition: var(--transition);
+        }
+        .nav-item:active { transform: scale(0.9); background: rgba(0,106,78,0.05); }
+        .nav-item.signs-btn { color: #f59e0b; font-weight: 600; }
+        .nav-item.signs-btn i { font-size: 1.2rem; }
+        .nav-item.signs-btn:hover { background: rgba(245,158,11,0.06); }
+        @media (max-width:360px) {
+            .nav-item i { font-size: 1.1rem; }
+            .nav-item .nav-label { font-size: 0.55rem; }
+            .nav-item { padding: 4px 1px; gap: 2px; }
+            .bottom-nav { height: 54px; }
+        }
+
+        /* ========== ফুটার ও ক্রেডিট কার্ড (আন্ডারলাইন রিমুভ) ========== */
+        .professional-footer {
+            background: #0f2b2b; color: #cbd5e1; margin-top: 1.5rem;
+            border-top: 3px solid #f5b042;
+        }
+        .footer-container {
+            max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem; border-bottom: 1px solid #2a4b4b;
+        }
+        .footer-col h3 { color: white; font-size: 0.9rem; margin-bottom: 0.6rem; border-left: 3px solid #f5b042; padding-left: 0.6rem; }
+        .footer-col p, .footer-col ul { font-size: 0.75rem; line-height: 1.5; }
         .footer-col ul { list-style: none; padding-left: 0; }
-        .footer-col li { margin-bottom: 0.5rem; }
-        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.2s; }
+        .footer-col li { margin-bottom: 0.3rem; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; transition: var(--transition); }
         .footer-col a:hover { color: #f5b042; text-decoration: underline; }
-        .apply-btn { display: inline-flex; align-items: center; gap: 10px; background: #f5b042; color: #0f2b2b !important; padding: 10px 20px; border-radius: 40px; font-weight: bold; transition: 0.2s; margin: 10px 0; }
-        .apply-btn:hover { background: #ffaa2b; transform: translateY(-2px); text-decoration: none !important; }
-        .credit-card { background: #1e3a3a; padding: 12px 18px; border-radius: 16px; display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 15px; border-left: 3px solid #f5b042; transition: 0.2s; }
-        .credit-card:hover { background: #2a4f4f; transform: translateY(-2px); }
-        .credit-label { font-size: 13px; font-weight: 500; color: #b9d4df; }
-        .credit-name { font-size: 16px; font-weight: 700; color: #fff; background: rgba(245, 176, 66, 0.2); padding: 4px 14px; border-radius: 40px; border: 1px solid rgba(245, 176, 66, 0.6); }
-        .credit-name i { margin-right: 6px; color: #f5b042; }
-        .credit-name span { color: #f5b042; }
-        /* যোগাযোগ সেকশন - লেখা ও আইকন এক লাইনে */
-        .contact-section { margin-top: 15px; text-align: left; }
-        .contact-text { font-size: 0.85rem; color: #b9d4df; margin-bottom: 8px; }
-        .contact-icons { display: flex; gap: 15px; align-items: center; }
-        .contact-icons a { display: inline-flex; align-items: center; gap: 6px; background: #2a4f4f; padding: 6px 14px; border-radius: 40px; font-size: 0.8rem; transition: 0.2s; color: #cbd5e1; text-decoration: none; }
+        .apply-btn {
+            display: inline-flex; align-items: center; gap: 8px; background: #f5b042; color: #0f2b2b !important;
+            padding: 8px 16px; border-radius: 40px; font-weight: 700; transition: var(--transition);
+            margin: 6px 0; font-size: 0.8rem; text-decoration: none !important;
+        }
+        .apply-btn:hover { background: #ffaa2b; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245,176,66,0.35); }
+
+        /* উন্নত ক্রেডিট কার্ড (আন্ডারলাইন সম্পূর্ণ রিমুভ) */
+        .credit-card {
+            background: linear-gradient(135deg, #1e3a3a, #0f2b2b);
+            padding: 12px 18px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            border: 1px solid rgba(245,176,66,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .credit-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+        .credit-label {
+            font-size: 12px; font-weight: 500; color: #b9d4df;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .credit-label i { color: #f5b042; font-size: 0.9rem; }
+        .credit-name-link {
+            text-decoration: none !important;
+            color: inherit;
+            display: inline-block;
+        }
+        .credit-name {
+            font-size: 16px; font-weight: 700; color: #fff;
+            background: rgba(245,176,66,0.15); padding: 4px 14px;
+            border-radius: 40px; border: 1px solid rgba(245,176,66,0.5);
+            transition: background 0.2s, border-color 0.2s;
+            display: flex; align-items: center; gap: 6px;
+            text-decoration: none !important;
+        }
+        .credit-name-link:hover .credit-name {
+            background: rgba(245,176,66,0.3); border-color: #f5b042;
+        }
+        .credit-name i { color: #f5b042; font-size: 1rem; }
+        .credit-name span { color: #f5b042; text-decoration: none !important; }
+
+        .contact-section { margin-top: 10px; text-align: left; }
+        .contact-text { font-size: 0.75rem; color: #b9d4df; margin-bottom: 6px; }
+        .contact-icons { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .contact-icons a {
+            display: inline-flex; align-items: center; gap: 5px; background: #2a4f4f;
+            padding: 5px 12px; border-radius: 40px; font-size: 0.7rem; transition: var(--transition);
+            color: #cbd5e1; text-decoration: none; font-weight: 500;
+        }
         .contact-icons a:hover { background: #f5b042; color: #0f2b2b; transform: translateY(-2px); }
-        .contact-icons i { font-size: 1.1rem; }
-        .footer-bottom { text-align: center; padding: 1.2rem; font-size: 0.75rem; color: #94a3b8; }
-        @media (max-width: 640px) {
-            .q-text { font-size: 1rem; }
-            .exam-opt { font-size: 0.85rem; }
-            .menu-btn { font-size: 0.75rem; padding: 0.3rem 0.7rem; }
-            .gov-header { font-size: 1rem; }
-            .score-big { font-size: 1.6rem; }
-            .footer-container { grid-template-columns: 1fr; }
-            .credit-card, .contact-icons { width: 100%; justify-content: center; }
-            .footer-col { text-align: center; }
+        .contact-icons i { font-size: 1rem; }
+        .footer-bottom { text-align: center; padding: 0.8rem; font-size: 0.7rem; color: #94a3b8; }
+
+        /* ========== PWA ইনস্টল পপআপ ========== */
+        .install-prompt-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 200;
+            display: none; align-items: flex-end; justify-content: center;
+            padding-bottom: 90px;
+        }
+        .install-prompt-card {
+            background: white;
+            border-radius: 28px 28px 16px 16px;
+            padding: 1.2rem 1.2rem 1rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp { from { transform: translateY(100px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+        .install-prompt-card h4 { font-size: 1rem; margin-bottom: 0.5rem; color: #0f172a; }
+        .install-prompt-card p { font-size: 0.8rem; color: #475569; margin-bottom: 1rem; }
+        .install-btn {
+            background: var(--primary); color: white; border: none; padding: 0.7rem 2rem;
+            border-radius: 40px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,106,78,0.3); transition: 0.2s;
+        }
+        .install-btn:hover { background: #008060; transform: translateY(-1px); }
+
+        @media (max-width:640px) {
+            .q-text { font-size: 0.9rem; }
+            .exam-opt { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
+            .score-big { font-size: 1.3rem; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
             .footer-col h3 { border-left: none; text-align: center; }
-            .contact-icons { flex-direction: row; justify-content: center; }
+            .credit-card, .contact-icons { width: 100%; justify-content: center; }
             .contact-section { text-align: center; }
+            .contact-icons { flex-direction: row; justify-content: center; }
+            .qa-card { padding: 0.6rem 0.8rem; }
+            .question-card { padding: 0.8rem; }
+            .install-prompt-overlay { padding-bottom: 70px; }
         }
     </style>
 </head>
 <body>
 
 <div class="gov-header">
-    <span>🇧🇩 বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</span>
-</div>
-
-<div class="menu-bar">
-    <button class="menu-btn" data-page="home"><i class="fas fa-home"></i> হোম</button>
-    <button class="menu-btn" data-page="study"><i class="fas fa-book-open"></i> প্রশ্ন ব্যাংক</button>
-    <button class="menu-btn" data-page="exam"><i class="fas fa-file-alt"></i> পরীক্ষা দিন</button>
-    <button class="menu-btn" data-page="apply"><i class="fas fa-id-card"></i> লাইসেন্স আবেদন</button>
-    <button id="openPdfBtn" class="menu-btn pdf-menu-btn"><i class="fas fa-traffic-light"></i> ট্রাফিক চিহ্ন</button>
+    <span class="flag">🇧🇩</span> বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র
 </div>
 
 <div class="dashboard">
     <div class="dash-card"><h4>📚 মোট প্রশ্ন</h4><p id="totalQty">0</p></div>
     <div class="dash-card"><h4>✅ পাস মার্ক</h4><p>১২/২০</p></div>
-    <div class="dash-card"><h4>⏱️ সময়/প্রশ্ন</h4><p>২০ সেকেন্ড</p></div>
+    <div class="dash-card"><h4>⏱️ সময়/প্রশ্ন</h4><p>২০ সে.</p></div>
 </div>
 
 <div class="container">
-    <div id="homePage" class="page">
-        <div style="background: white; border-radius: 28px; padding: 2rem; text-align: center;">
-            <i class="fas fa-car" style="font-size: 70px; color: #006A4E;"></i>
-            <h2 style="margin: 1rem 0;">সড়ক পরিবহন ও সেতু মন্ত্রণালয়</h2>
-            <p>৬০টি প্রশ্নের ব্যাংক, টাইমড পরীক্ষা এবং লাইসেন্স প্রক্রিয়া সম্পর্কে জানুন।<br>
-            <strong>মৌখিক পরীক্ষার জন্য "ট্রাফিক চিহ্ন" বাটনে ক্লিক করে PDF দেখুন ও জুম করুন।</strong></p>
-            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <div id="homePage" class="page active-page">
+        <div style="background: white; border-radius: 24px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+            <div style="font-size: 55px; margin-bottom: 0.5rem;">🚗</div>
+            <h2 style="margin: 0.5rem 0; font-size: 1.1rem;">সড়ক পরিবহন ও সেতু মন্ত্রণালয়</h2>
+            <p style="font-size: 0.82rem; color: #475569;">৬০টি প্রশ্নের ব্যাংক, টাইমড পরীক্ষা এবং লাইসেন্স প্রক্রিয়া সম্পর্কে জানুন।<br>
+            <strong>মৌখিক পরীক্ষার জন্য নিচের "চিহ্ন" বাটনে ক্লিক করে PDF দেখুন।</strong></p>
+            <div style="margin-top: 1rem; display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;">
                 <button class="btn btn-primary" id="goStudyBtn">📖 প্রশ্ন পড়ুন</button>
                 <button class="btn btn-primary" id="goExamBtn">📝 পরীক্ষা শুরু</button>
             </div>
@@ -140,9 +385,9 @@
     <div id="studyPage" class="page">
         <div class="filter-group">
             <button class="filter-btn active" data-filter="all">সব (৬০)</button>
-            <button class="filter-btn" data-filter="mechanism">গাড়ির মেকানিজম</button>
-            <button class="filter-btn" data-filter="duty">চালকের দায়িত্ব</button>
-            <button class="filter-btn" data-filter="signs">ট্রাফিক চিহ্ন</button>
+            <button class="filter-btn" data-filter="mechanism">🔧 মেকানিজম</button>
+            <button class="filter-btn" data-filter="duty">📋 চালকের দায়িত্ব</button>
+            <button class="filter-btn" data-filter="signs">⚠️ ট্রাফিক চিহ্ন</button>
         </div>
         <div id="studyList" class="qa-list"></div>
     </div>
@@ -150,331 +395,444 @@
     <div id="examPage" class="page">
         <div class="exam-header">
             <div class="q-counter">📋 প্রশ্ন <span id="qCounter">1</span>/<span id="totalExamQ">20</span></div>
-            <div class="timer-card">⏱️ <span id="examTimer">20</span> সেকেন্ড</div>
-            <button id="forceFinishBtn" class="force-finish-btn"><i class="fas fa-stop"></i> পরীক্ষা শেষ করুন</button>
+            <div class="timer-card">⏱️ <span id="examTimer">20</span> সে.</div>
+            <button id="forceFinishBtn" class="force-finish-btn"><i class="fas fa-stop"></i> শেষ করুন</button>
         </div>
         <div id="examContainer" class="question-card"></div>
     </div>
 
     <div id="applyPage" class="page">
         <div class="apply-card">
-            <h2><i class="fas fa-id-card"></i> ড্রাইভিং লাইসেন্স আবেদন - প্রয়োজনীয় ডকুমেন্ট ও পদ্ধতি</h2>
-            <div style="background: #eef2ff; padding: 1rem; border-radius: 20px; margin: 1rem 0;">
-                <h3><i class="fas fa-file-alt"></i> আবেদনের জন্য আবশ্যক কাগজপত্র:</h3>
+            <h2><i class="fas fa-id-card"></i> ড্রাইভিং লাইসেন্স আবেদন - প্রয়োজনীয় ডকুমেন্ট</h2>
+            <div style="background: #eef2ff; padding: 0.7rem; border-radius: 16px; margin: 0.5rem 0;">
+                <h3 style="font-size:0.85rem;"><i class="fas fa-file-alt"></i> আবশ্যক কাগজপত্র:</h3>
                 <ul class="doc-list">
                     <li>✅ <strong>মেডিকেল সার্টিফিকেট</strong> (স্বাস্থ্য পরীক্ষা সনদ)</li>
-                    <li>✅ <strong>ভোটার আইডি কার্ড / জাতীয় পরিচয়পত্র</strong> (স্মার্ট কার্ড)</li>
-                    <li>✅ <strong>পাশকৃত যেকোনো সার্টিফিকেট</strong> (ন্যূনতম ৮ম শ্রেণি পাসের সনদ)</li>
-                    <li>✅ <strong>১ কপি ৫ ফটো সাইজ রঙিন ছবি</strong> (লাল/নীল ব্যাকগ্রাউন্ড)</li>
+                    <li>✅ <strong>ভোটার আইডি কার্ড / এনআইডি</strong> (স্মার্ট কার্ড)</li>
+                    <li>✅ <strong>পাশকৃত যেকোনো সার্টিফিকেট</strong> (ন্যূনতম ৮ম শ্রেণি)</li>
+                    <li>✅ <strong>১ কপি ৫ ফটো সাইজ রঙিন ছবি</strong></li>
                 </ul>
             </div>
             <div class="steps-container">
-                <h3><i class="fas fa-globe"></i> অনলাইনে আবেদন প্রক্রিয়া (BRTA)</h3>
-                <p style="margin: 0.5rem 0;"><strong>ধাপ ১:</strong> বিআরটিএর অনলাইন পোর্টালে যান:<br>
-                <a href="https://bsp.brta.gov.bd/login" target="_blank" style="color:#006A4E; font-weight:bold;">👉 https://bsp.brta.gov.bd/login 👈</a> (নতুন ট্যাবে খুলবে)</p>
-                <p><strong>ধাপ ২:</strong> আপনার জাতীয় পরিচয়পত্রের সাথে রেজিস্টার্ড সিম নম্বর ব্যবহার করে একাউন্ট তৈরি করুন। <br>
-                <span style="background:#e0f2fe; padding:0.2rem 0.6rem; border-radius:20px;">📱 আপনার আইডি কার্ড দিয়ে তোলা সিম নাম্বার দিয়ে একাউন্ট করুন</span></p>
-                <p><strong>ধাপ ৩:</strong> আবেদন ফরম পূরণ, প্রয়োজনীয় ডকুমেন্ট আপলোড ও ফি পরিশোধ করুন।</p>
-                <p><strong>ধাপ ৪:</strong> পরীক্ষার তারিখ নির্বাচন করুন এবং পরীক্ষায় অংশ নিন।</p>
-                <p><strong>ধাপ ৫:</strong> পাস করলে স্মার্ট কার্ড লাইসেন্স প্রাপ্তি।</p>
+                <h3><i class="fas fa-globe"></i> অনলাইনে আবেদন (BRTA)</h3>
+                <p style="margin:0.3rem 0;font-size:0.8rem;"><strong>ধাপ ১:</strong> পোর্টালে যান:<br>
+                <a href="https://bsp.brta.gov.bd/login" target="_blank" style="color:#006A4E;font-weight:700;">👉 bsp.brta.gov.bd/login 👈</a></p>
+                <p style="font-size:0.8rem;"><strong>ধাপ ২:</strong> এনআইডি-রেজিস্টার্ড সিম নম্বর দিয়ে একাউন্ট তৈরি করুন।</p>
+                <p style="font-size:0.8rem;"><strong>ধাপ ৩:</strong> ফরম পূরণ, ডকুমেন্ট আপলোড ও ফি পরিশোধ।</p>
+                <p style="font-size:0.8rem;"><strong>ধাপ ৪:</strong> পরীক্ষার তারিখ নির্বাচন ও পরীক্ষা।</p>
+                <p style="font-size:0.8rem;"><strong>ধাপ ৫:</strong> পাস করলে স্মার্ট কার্ড লাইসেন্স প্রাপ্তি।</p>
             </div>
         </div>
-
         <div class="apply-card">
-            <h3><i class="fas fa-list-ol"></i> লাইসেন্স প্রাপ্তির সম্পূর্ণ ধাপ (অফিস ও অনলাইন)</h3>
+            <h3><i class="fas fa-list-ol"></i> লাইসেন্স প্রাপ্তির ধাপ</h3>
             <div class="steps-container">
-                <div class="step-item"><span class="step-num">১</span> <strong>কাগজপত্র যাচাই</strong> – জাতীয় পরিচয়পত্র, ছবি, মেডিকেল সার্টিফিকেট</div>
-                <div class="step-item"><span class="step-num">২</span> <strong>ফিঙ্গারপ্রিন্ট ও বায়োমেট্রিক নিবন্ধন</strong> – বিআরটিএ অফিসে</div>
-                <div class="step-item"><span class="step-num">৩</span> <strong>লিখিত পরীক্ষা (থিওরি)</strong> – ট্রাফিক আইন ও সাইন</div>
-                <div class="step-item"><span class="step-num">৪</span> <strong>মৌখিক পরীক্ষা (ভাইবা)</strong> – মৌলিক নিয়ম ও ট্রাফিক চিহ্ন (PDF দেখুন)</div>
-                <div class="step-item"><span class="step-num">৫</span> <strong>মাঠ/ব্যবহারিক পরীক্ষা (ড্রাইভিং টেস্ট)</strong></div>
-                <div class="step-item"><span class="step-num">৬</span> <strong>ফলাফল প্রকাশ</strong> – পাস/ফেল</div>
-                <div class="step-item"><span class="step-num">৭</span> <strong>ফি পরিশোধ ও নথিপত্র জমা</strong></div>
-                <div class="step-item"><span class="step-num">৮</span> <strong>অনলাইন ড্রাইভিং লাইসেন্স প্রদান</strong> – স্মার্ট কার্ড</div>
-            </div>
-            <div style="margin-top: 20px; background: #e6f7e6; padding: 1rem; border-radius: 20px;">
-                <i class="fas fa-info-circle"></i> <strong>স্মার্ট লাইসেন্স পেতে ৯০-১২০ দিন সময় লাগতে পারে। আবেদনের পূর্বে brta.gov.bd ভিজিট করুন।</strong>
+                <div class="step-item"><span class="step-num">১</span> কাগজপত্র যাচাই</div>
+                <div class="step-item"><span class="step-num">২</span> ফিঙ্গারপ্রিন্ট ও বায়োমেট্রিক</div>
+                <div class="step-item"><span class="step-num">৩</span> লিখিত পরীক্ষা (থিওরি)</div>
+                <div class="step-item"><span class="step-num">৪</span> মৌখিক পরীক্ষা (ভাইবা)</div>
+                <div class="step-item"><span class="step-num">৫</span> মাঠ/ব্যবহারিক পরীক্ষা</div>
+                <div class="step-item"><span class="step-num">৬</span> ফলাফল প্রকাশ</div>
+                <div class="step-item"><span class="step-num">৭</span> ফি পরিশোধ ও নথি জমা</div>
+                <div class="step-item"><span class="step-num">৮</span> স্মার্ট কার্ড লাইসেন্স প্রদান</div>
             </div>
         </div>
         <div class="apply-card">
             <h3><i class="fas fa-user-check"></i> বয়সের শর্ত</h3>
-            <p><strong>অপেশাদার লাইসেন্স (প্রাইভেট গাড়ি/মোটরসাইকেল):</strong> ন্যূনতম ১৮ বছর</p>
-            <p><strong>পেশাদার লাইসেন্স (ট্যাক্সি/ট্রাক/বাস):</strong> ন্যূনতম ২১ বছর</p>
+            <p style="font-size:0.82rem;"><strong>অপেশাদার (প্রাইভেট/মোটরসাইকেল):</strong> ন্যূনতম ১৮ বছর</p>
+            <p style="font-size:0.82rem;"><strong>পেশাদার (ট্যাক্সি/ট্রাক/বাস):</strong> ন্যূনতম ২১ বছর</p>
         </div>
     </div>
 </div>
 
-<!-- ========== প্রফেশনাল ফুটার (আইকন এক লাইনে, নাম্বার ছাড়া) ========== -->
+<!-- বটম নেভিগেশন -->
+<nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-page="home"><i class="fas fa-home"></i><span class="nav-label">হোম</span></button>
+    <button class="nav-item" data-page="study"><i class="fas fa-book-open"></i><span class="nav-label">প্রশ্ন</span></button>
+    <button class="nav-item" data-page="exam"><i class="fas fa-file-alt"></i><span class="nav-label">পরীক্ষা</span></button>
+    <button class="nav-item" data-page="apply"><i class="fas fa-id-card"></i><span class="nav-label">আবেদন</span></button>
+    <button class="nav-item signs-btn" id="bottomNavSigns"><i class="fas fa-traffic-light"></i><span class="nav-label">চিহ্ন</span></button>
+</nav>
+
+<!-- ফুটার -->
 <footer class="professional-footer">
     <div class="footer-container">
         <div class="footer-col">
-            <h3><i class="fas fa-id-card"></i> অনলাইনে লাইসেন্স আবেদন</h3>
-            <a href="https://bsp.brta.gov.bd/login" target="_blank" class="apply-btn">
-                <i class="fas fa-external-link-alt"></i> বিআরটিএ অনলাইন পোর্টালে আবেদন করুন
-            </a>
-            <p style="font-size: 0.8rem; margin-top: 10px;">
-                🔹 আবেদন করতে প্রয়োজনীয় ডকুমেন্টসহ <strong>বিআরটিএর অফিসিয়াল পোর্টালে</strong> লগইন করুন।<br>
-                🔹 নতুন ব্যবহারকারী? প্রথমে একাউন্ট তৈরি করুন (জাতীয় পরিচয়পত্র ও রেজিস্টার্ড সিম নম্বর দিয়ে)।
-            </p>
+            <h3><i class="fas fa-id-card"></i> অনলাইনে আবেদন</h3>
+            <a href="https://bsp.brta.gov.bd/login" target="_blank" class="apply-btn"><i class="fas fa-external-link-alt"></i> বিআরটিএ পোর্টালে আবেদন</a>
+            <p style="font-size:0.7rem;margin-top:6px;">🔹 এনআইডি ও রেজিস্টার্ড সিম নম্বর দিয়ে লগইন করুন।</p>
         </div>
-
         <div class="footer-col">
             <h3><i class="fas fa-link"></i> গুরুত্বপূর্ণ লিংক</h3>
             <ul>
-                <li><a href="https://brta.gov.bd" target="_blank">বাংলাদেশ সড়ক পরিবহন কর্তৃপক্ষ (BRTA)</a></li>
-                <li><a href="https://bsp.brta.gov.bd/login" target="_blank">লাইসেন্স আবেদন পোর্টাল (bsp.brta.gov.bd)</a></li>
-                <li><a href="#">ড্রাইভিং লাইসেন্স ফি কাঠামো</a></li>
-                <li><a href="#">ট্রাফিক সাইন গাইড (PDF)</a></li>
-                <li><a href="#">প্রশ্ন ব্যাংক ডাউনলোড</a></li>
+                <li><a href="https://brta.gov.bd" target="_blank">বিআরটিএ (BRTA)</a></li>
+                <li><a href="https://bsp.brta.gov.bd/login" target="_blank">লাইসেন্স পোর্টাল</a></li>
+                <li><a href="#">ড্রাইভিং লাইসেন্স ফি</a></li>
+                <li><a href="#">ট্রাফিক সাইন গাইড</a></li>
             </ul>
         </div>
-
         <div class="footer-col">
-            <h3><i class="fas fa-building"></i> সড়ক পরিবহন ও সেতু মন্ত্রণালয়</h3>
+            <h3><i class="fas fa-building"></i> সড়ক পরিবহন মন্ত্রণালয়</h3>
             <p>বাংলাদেশ সচিবালয়, ঢাকা-১০০০</p>
             <p><i class="fas fa-envelope"></i> info@brta.gov.bd</p>
             <p><i class="fas fa-phone-alt"></i> হটলাইন: ১৬১০০</p>
+            <!-- উন্নত ক্রেডিট কার্ড (আন্ডারলাইন রিমুভ) -->
             <div class="credit-card">
-                <span class="credit-label">🔧 প্রণয়ন ও ডিজাইন করেছেন</span>
-                <div class="credit-name">
-                    <i class="fas fa-laptop-code"></i> <span>সুইট বয় নয়ন</span>
-                </div>
+                <span class="credit-label"><i class="fas fa-tools"></i> প্রণয়ন ও ডিজাইন</span>
+                <a href="https://ah-nayon.github.io/web/" target="_blank" rel="noopener noreferrer" class="credit-name-link">
+                    <div class="credit-name">
+                        <i class="fas fa-code"></i> <span>সুইট বয় নয়ন</span>
+                    </div>
+                </a>
             </div>
-            <!-- যোগাযোগ সেকশন: লেখা + এক লাইনে আইকন -->
             <div class="contact-section">
-                <div class="contact-text">📞 কোন ওয়েবসাইট বা সমস্যার জন্য নক করুন</div>
+                <div class="contact-text">📞 যোগাযোগ করুন</div>
                 <div class="contact-icons">
-                    <a href="https://wa.me/8801757827996" target="_blank">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="https://www.facebook.com/share/1E3hC9kFHj/" target="_blank">
-                        <i class="fab fa-facebook"></i> Facebook
-                    </a>
+                    <a href="https://wa.me/8801757827996" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://www.facebook.com/share/1E3hC9kFHj/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="footer-bottom">
-        © ২০২৬ বাংলাদেশ ড্রাইভিং লাইসেন্স প্রস্তুতি কেন্দ্র | সকল প্রশ্ন সড়ক পরিবহন মন্ত্রণালয়ের প্রশ্ন ব্যাংক ও ট্রাফিক আইন থেকে সংগৃহীত।<br>
-        সড়ক নিরাপত্তা ও ট্রাফিক আইন মেনে চলুন | নিরাপদ ড্রাইভিং করুন, জীবন বাঁচান।
+        © ২০২৬ বাংলাদেশ ড্রাইভিং লাইসেন্স প্রস্তুতি কেন্দ্র | সড়ক নিরাপত্তা ও ট্রাফিক আইন মেনে চলুন।
     </div>
 </footer>
+
+<!-- PWA ইনস্টল পপআপ (কোনো X বাটন নেই, ব্যাকড্রপ ট্যাপে ডিসমিস) -->
+<div id="installPromptOverlay" class="install-prompt-overlay">
+    <div class="install-prompt-card">
+        <h4><i class="fas fa-download"></i> অ্যাপ ইন্সটল করুন</h4>
+        <p>আমাদের ওয়েব অ্যাপটি আপনার ফোনের হোম স্ক্রিনে যুক্ত করুন এবং দ্রুত ব্যবহার করুন।</p>
+        <button id="installBtn" class="install-btn">📲 ইন্সটল করুন</button>
+    </div>
+</div>
 
 <!-- রেজাল্ট মোডাল -->
 <div id="resultModal" class="modal">
     <div class="modal-content">
         <span class="modal-close" id="closeModalX">&times;</span>
-        <h2 id="modalTitle">🎯 ফলাফল</h2>
+        <h2 id="modalTitle" style="text-align:center;">🎯 ফলাফল</h2>
         <div id="scoreSummary"></div>
         <div id="wrongDetails"></div>
-        <button id="closeModalBtn" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">বন্ধ করুন</button>
+        <button id="closeModalBtn" class="btn btn-primary" style="margin-top:0.8rem;width:100%;">বন্ধ করুন</button>
     </div>
 </div>
 
 <script>
-// ৬০টি প্রশ্ন (পূর্ণ - আগের মতোই, সংক্ষেপে দিচ্ছি কিন্তু আপনার মূল কোডে পূর্ণ ছিল)
-const allQuestions = [
-    { id:1, text:"কুলিং ফ্যানের কাজ কী?", options:["রেডিয়েটরের পানি ঠান্ডা করা","ইঞ্জিন অয়েল ঠান্ডা করা","ব্রেক অয়েল ঠান্ডা করা","ব্যাটারি ঠান্ডা করা"], correct:0, category:"mechanism", signType:null },
-    { id:2, text:"টেম্পারেচার গেজ ইঞ্জিনের কী নির্দেশ করে?", options:["ইঞ্জিনের কার্যকরী তাপমাত্রা","গিয়ার বক্সের তাপমাত্রা","রেডিয়েটরের তাপমাত্রা","গাড়ির বাতাসের তাপমাত্রা"], correct:0, category:"mechanism", signType:null },
-    { id:3, text:"গাড়ি স্টার্ট না হওয়ার কারণ কী?", options:["ব্রেক অয়েল না থাকলে","গিয়ার অয়েল না থাকলে","প্রয়োজনীয় জ্বালানী না থাকলে","ক্র্যাঙ্কশ্যাফ্ট অয়েল না থাকলে"], correct:2, category:"mechanism", signType:null },
-    { id:4, text:"ব্রেক মাস্টার সিলিন্ডারে ব্রেক ফ্লুইড লেভেল কম থাকলে কী হতে পারে?", options:["ব্রেক ফেইল","ইঞ্জিন ওভারহিট","কালো ধোঁয়া","বিকট আওয়াজ"], correct:0, category:"mechanism", signType:null },
-    { id:5, text:"ক্লাচের কাজ কী?", options:["গাড়ির গতি কমানো","ইঞ্জিন ও গিয়ারবক্স সংযোগ ও বিচ্ছিন্ন করা","গাড়ি নিউট্রাল করা","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
-    { id:6, text:"ইঞ্জিন অতিরিক্ত গরম হওয়ার কারণ?", options:["কুলিং ফ্যান কাজ না করলে","রেডিয়েটরে পানি/কুল্যান্ট কম থাকলে","উপরের সবগুলি","ব্যাটারি ডেড"], correct:2, category:"mechanism", signType:null },
-    { id:7, text:"এয়ার ক্লিনারের কাজ কী?", options:["ইঞ্জিন ঠান্ডা করা","বাতাস ও পেট্রোল মিশ্রণ","বাতাস পরিষ্কার করা","ইঞ্জিন চালুতে সহায়তা"], correct:2, category:"mechanism", signType:null },
-    { id:8, text:"টায়ার অতিরিক্ত ক্ষয় হয় কেন?", options:["চাকার এলাইনমেন্ট সঠিক না থাকলে","বাতাসের চাপ কম/বেশি হলে","অতিরিক্ত মালামাল বহন করলে","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
-    { id:9, text:"পেট্রোল ইঞ্জিনের প্রতি সিলিন্ডারে কয়টি স্পার্ক প্লাগ থাকে?", options:["১টি","২টি","৩টি","৪টি"], correct:0, category:"mechanism", signType:null },
-    { id:10, text:"ফুয়েল ও বাতাস নির্দিষ্ট অনুপাতে মিশ্রিত করে ইঞ্জিনে সরবরাহ করে?", options:["এয়ার ক্লিনার","স্পার্ক প্লাগ","কার্বুরেটর","মিশ্রণ"], correct:2, category:"mechanism", signType:null },
-    { id:11, text:"রেডিয়েটরের প্রধান কাজ কী?", options:["পানি ঠান্ডা করা","রেডিও চালনা","জয়েন্ট পার্টস ঠিক করা","ইঞ্জিন গরম করা"], correct:0, category:"mechanism", signType:null },
-    { id:12, text:"ইঞ্জিনের কুলিং সিস্টেমে কুলিং মিডিয়া হিসেবে কী ব্যবহৃত হয়?", options:["তৈল","গ্যাস","পানি","ডিজেল"], correct:2, category:"mechanism", signType:null },
-    { id:13, text:"গিয়ার লিক করার কারণ কী?", options:["গিয়ারের দাঁত ভাঙ্গা থাকিলে","ক্লাচ ঠিকমতো কাজ না করলে","গিয়ার ভালোভাবে সংযোগ না হলে","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
-    { id:14, text:"ফুয়েল লাইনে বাতাস প্রবেশের কারণে ফুয়েল সরবরাহ বন্ধ হয়ে যাওয়াকে বলে?", options:["এয়ার লক","ত্রৈপার লক","অটো লক","এন্টি লক"], correct:0, category:"mechanism", signType:null },
-    { id:15, text:"সাইলেন্সারের কাজ কী?", options:["শব্দ নিয়ন্ত্রণ করা","দূষণ নির্ধারণ","বায়ু দূষণমুক্ত করা","গরম বাতাস বের করা"], correct:0, category:"mechanism", signType:null },
-    { id:16, text:"হেড লাইট না জ্বললে প্রথমে কী চেক করবেন?", options:["নির্ধারিত ফিউজ","লাইন চেক","ইঞ্জিন অয়েল","সুইচ"], correct:0, category:"mechanism", signType:null },
-    { id:17, text:"টায়ার ফেটে গেলে করণীয়?", options:["তাত্ক্ষণিক ব্রেক","এক্সিলারেটর থেকে পা সরিয়ে স্টিয়ারিং ধরে রাখা","গিয়ার নিউট্রাল","গাড়ি একপাশে সরানো"], correct:1, category:"mechanism", signType:null },
-    { id:18, text:"হুইল অয়েল কোথায় দিতে হয়?", options:["হেড কভারে","ব্যাক কভারে","জয়েন্ট অংশে","ফুয়েল গেজে"], correct:0, category:"mechanism", signType:null },
-    { id:19, text:"ডিস্টিলড ওয়াটার কোথায় ঢালতে হয়?", options:["কার্বুরেটরে","রেডিয়েটারে","ব্যাটারিতে","উইন্ডস্ক্রিনে"], correct:2, category:"mechanism", signType:null },
-    { id:20, text:"গিয়ার পরিবর্তনের সময় কী করতে হবে?", options:["ব্রেক প্যাডেল চাপা","ক্লাচ প্যাডেল চাপা","এক্সিলারেটর চাপা","গতি কমাতে হবে"], correct:1, category:"mechanism", signType:null },
-    { id:21, text:"চলন্ত অবস্থায় ইঞ্জিন ওভারহিট হয়ে গেলে করণীয়?", options:["গাড়ি চালিয়ে যেতে হবে","পার্ক করে ইঞ্জিন ঠান্ডা হতে দিতে হবে","গাড়ি ব্লক করতে হবে","আস্তে আস্তে যেতে হবে"], correct:1, category:"duty", signType:null },
-    { id:22, text:"ইঞ্জিন অয়েলের মেয়াদ শেষ হলে কী পরিবর্তন জরুরি?", options:["এয়ার ফিল্টার","ইঞ্জিন অয়েল ফিল্টার","গিয়ার অয়েল ফিল্টার","ফুয়েল ফিল্টার"], correct:1, category:"duty", signType:null },
-    { id:23, text:"ইঞ্জিন অয়েল কত কিমি চলার পর বদলানো উচিত?", options:["২৫০০","৪০০০","৮০০০","প্রস্তুতকারক নির্দেশিকা অনুযায়ী"], correct:3, category:"duty", signType:null },
-    { id:24, text:"ব্যাটারিতে ইলেক্ট্রোলাইট লেভেল কমে গেলে কী ব্যবহার করবেন?", options:["নদীর পানি","মিনারেল ওয়াটার","ডিস্টিলড ওয়াটার","সাগরের পানি"], correct:2, category:"duty", signType:null },
-    { id:25, text:"চালক অপ্রাপ্ত গাড়ি পোস্টে একত্রিত দলের নিশ্চিত হয়ে জরিমানা?", options:["১০০ টাকা","২০০ টাকা","৫০০ টাকা","১০০০ টাকা"], correct:1, category:"duty", signType:null },
-    { id:26, text:"নিষিদ্ধ হর্ণ বাজালে জরিমানা?", options:["৫০ টাকা","১০০ টাকা","২০০ টাকা","৫০০ টাকা"], correct:1, category:"duty", signType:null },
-    { id:27, text:"শুকনো পাকা রাস্তায় ৫০ কিমি/ঘ গতিতে নিরাপদ দূরত্ব কত মিটার?", options:["১৫ মি","২০ মি","২৫ মি","৩০ মি"], correct:2, category:"duty", signType:null },
-    { id:28, text:"একটানা কত ঘন্টা গাড়ি চালানো যায়?", options:["৪ ঘন্টা","৫ ঘন্টা","৬ ঘন্টা","৮ ঘন্টা"], correct:1, category:"duty", signType:null },
-    { id:29, text:"গাড়ি চালানোর সময় সাইড মিরর কতবার দেখা উচিত?", options:["২-৪ বার","৪-৬ বার","৬-৮ বার","৮-১০ বার"], correct:2, category:"duty", signType:null },
-    { id:30, text:"অপেশাদার লাইসেন্সের জন্য ন্যূনতম বয়স?", options:["১৬ বছর","১৮ বছর","২০ বছর","২১ বছর"], correct:1, category:"duty", signType:null },
-    { id:31, text:"পেশাদার লাইসেন্সের জন্য ন্যূনতম বয়স?", options:["১৮ বছর","২০ বছর","২১ বছর","২৫ বছর"], correct:2, category:"duty", signType:null },
-    { id:32, text:"ফার্স্ট এইড মানে?", options:["প্রাথমিক চিকিৎসা","অ্যাম্বুলেন্স","দুর্ঘটনা প্রতিরোধ","আগুন নেভানো"], correct:0, category:"duty", signType:null },
-    { id:33, text:"রাজস্ব গাড়ির হেডলাইট মুখোমুখি হলে কী করা উচিত?", options:["অফ","ডিম (লো বিম)","হাইবিম","জ্বালিয়ে রাখা"], correct:1, category:"duty", signType:null },
-    { id:34, text:"ব্রেক ফেইলুর কারণ হতে পারে?", options:["ব্রেক ফ্লুইড কম","ব্রেক প্যাড শেষ","মাস্টার সিলিন্ডার ত্রুটি","উপরের সব"], correct:3, category:"duty", signType:null },
-    { id:35, text:"মোটরযান আইনে বীমার প্রয়োজন কেন?", options:["তৃতীয় পক্ষের নিরাপত্তা","গাড়ির নিরাপত্তা","চালকের নিরাপত্তা","সবগুলো"], correct:0, category:"duty", signType:null },
-    { id:36, text:"অবৈধ মোটরযান চালালে সর্বোচ্চ জরিমানা?", options:["৫০০","১০০০","২০০০","৫০০০"], correct:2, category:"duty", signType:null },
-    { id:37, text:"কোন স্থানে হর্ণ বাজানো উচিত নয়?", options:["হাসপাতাল","স্কুল","শান্তি এলাকা","সবকটি"], correct:3, category:"duty", signType:null },
-    { id:38, text:"ওভারটেকিং করার সময় করণীয়?", options:["সিগন্যাল দিয়ে","বাম দিক থেকে","ডান দিক থেকে সতর্কতা","ক ও গ"], correct:3, category:"duty", signType:null },
-    { id:39, text:"বৃষ্টিতে গাড়ি চালানোর সময় কী বাড়াতে হবে?", options:["গতি","সতর্কতা ও দূরত্ব","টায়ারের চাপ","ব্রেক"], correct:1, category:"duty", signType:null },
-    { id:40, text:"লাইসেন্স ছাড়া গাড়ি চালালে জরিমানা?", options:["১০০০","২০০০","৫০০০","১০০০০"], correct:1, category:"duty", signType:null },
-    { id:41, text:"লাল বৃত্তের ভিতরে সাদা অনুভূমিক রেখা চিহ্নের অর্থ?", options:["প্রবেশ নিষেধ","গতি সীমা","পার্কিং নিষেধ","ওভারটেক নিষেধ"], correct:0, category:"signs", signType:"noEntry" },
-    { id:42, text:"নীল বৃত্তের ভিতরে 'P' চিহ্ন মানে?", options:["পার্কিং স্থান","পথচারী পারাপার","পুলিশ স্টেশন","পেট্রোল পাম্প"], correct:0, category:"signs", signType:"parkingP" },
-    { id:43, text:"হলুদ ত্রিভুজের ভিতরে শিশু চিহ্ন মানে?", options:["স্কুল এলাকা","শিশু ক্রীড়া স্থান","সতর্কতা","পথচারী পারাপার"], correct:0, category:"signs", signType:"warning" },
-    { id:44, text:"লাল অষ্টভুজ STOP চিহ্নের অর্থ?", options:["থামুন","গতি কমিয়ে চলুন","পথ দিন","শুধু থামুন ও চলুন"], correct:0, category:"signs", signType:"stop" },
-    { id:45, text:"লাল বৃত্তের ভিতরে ৫০ লেখা মানে?", options:["গতি সীমা ৫০ কিমি/ঘ","৫০ মিটার দূরত্ব","৫০ টাকা জরিমানা","৫০ নম্বর সড়ক"], correct:0, category:"signs", signType:"speed" },
-    { id:46, text:"নীল আয়তক্ষেত্রের ভিতরে হাসপাতাল চিহ্ন মানে?", options:["হাসপাতাল","ডাক্তারখানা","প্রাথমিক চিকিৎসা","অ্যাম্বুলেন্স"], correct:0, category:"signs", signType:"info" },
-    { id:47, text:"লাল বৃত্তে ক্রস (X) ওভারটেকিং চিহ্ন মানে?", options:["ওভারটেকিং নিষেধ","ওভারটেকিং জোন","ওভারটেকিং সতর্ক","সামনে ওভারটেক"], correct:0, category:"signs", signType:"noOvertake" },
-    { id:48, text:"'হর্ন বাজানো নিষেধ' চিহ্নের বর্ণনা?", options:["লাল বৃত্তে হর্ণ","নীল বৃত্তে বাঁশি","লাল বৃত্তে ক্রস সহ হর্ণ","হলুদ ত্রিভুজ"], correct:2, category:"signs", signType:"noHorn" },
-    { id:49, text:"সামনে বামে মোড় নিষেধ চিহ্ন কোনটি?", options:["লাল বৃত্তে বাম তীর","নীল বৃত্তে বাম তীর","লাল ত্রিভুজে বাম তীর","হলুদ ডিম্বাকৃতি"], correct:0, category:"signs", signType:"noLeft" },
-    { id:50, text:"প্রবেশ নিষেধ চিহ্নের রং ও আকৃতি?", options:["লাল বৃত্ত","লাল ত্রিভুজ","নীল বৃত্ত","হলুদ বর্গ"], correct:0, category:"signs", signType:"noEntry" },
-    { id:51, text:"'একমুখী সড়ক' চিহ্নটি কেমন?", options:["নীল আয়তক্ষেত্রে সাদা তীর","লাল বৃত্তে তীর","হলুদ ত্রিভুজ","সবুজ বর্গ"], correct:0, category:"signs", signType:"oneWay" },
-    { id:52, text:"বিপদজনক বাঁক সতর্কতা চিহ্ন?", options:["হলুদ ত্রিভুজে কালো তীর","লাল বৃত্ত","নীল বর্গ","সাদা ত্রিভুজ"], correct:0, category:"signs", signType:"warning" },
-    { id:53, text:"পথচারী পারাপারের চিহ্ন কী রং?", options:["হলুদ ত্রিভুজে কালো মানুষ","লাল বৃত্ত","নীল বৃত্ত","সবুজ বর্গ"], correct:0, category:"signs", signType:"pedestrian" },
-    { id:54, text:"ট্রাক প্রবেশ নিষেধ চিহ্ন?", options:["লাল বৃত্তে ট্রাক","নীল বৃত্তে ট্রাক","হলুদ ত্রিভুজে ট্রাক","সাদা বর্গ"], correct:0, category:"signs", signType:"noTruck" },
-    { id:55, text:"পার্কিং নিষেধ চিহ্নের বৈশিষ্ট্য?", options:["লাল বৃত্তে P ও ক্রস","নীল বৃত্তে P","লাল ত্রিভুজে P","সবুজ P"], correct:0, category:"signs", signType:"noParking" },
-    { id:56, text:"যানবাহনের উচ্চতা সীমা চিহ্ন?", options:["লাল বৃত্তে মিটার সংখ্যা","নীল বর্গ","হলুদ ত্রিভুজ","সবুজ ত্রিভুজ"], correct:0, category:"signs", signType:"heightLimit" },
-    { id:57, text:"U-টার্ন নিষেধ চিহ্ন?", options:["লাল বৃত্তে U চিহ্ন ক্রস","নীল বৃত্তে U","হলুদ ত্রিভুজে U","সবুজ U"], correct:0, category:"signs", signType:"noUturn" },
-    { id:58, text:"'হাত দিন' চিহ্ন মানে?", options:["অন্য গাড়িকে পথ দিন","হাত বাড়ান","থামুন","সিগন্যাল দিন"], correct:0, category:"signs", signType:"giveWay" },
-    { id:59, text:"ডানে মোড় নিষেধ চিহ্ন?", options:["লাল বৃত্তে ডান তীর","নীল বৃত্তে ডান তীর","লাল ত্রিভুজ","হলুদ বর্গ"], correct:0, category:"signs", signType:"noRight" },
-    { id:60, text:"নীল বৃত্তে সোজা তীর চিহ্ন অর্থ?", options:["কেবল সোজা যান","বামে যান","ডানে যান","সামনে থামুন"], correct:0, category:"signs", signType:"straightOnly" }
-];
+    // ========== PWA ইনস্টল ও সার্ভিস ওয়ার্কার ==========
+    // সার্ভিস ওয়ার্কার রেজিস্ট্রেশন (ব্লব দিয়ে)
+    if ('serviceWorker' in navigator) {
+        const swCode = `
+            self.addEventListener('install', e => self.skipWaiting());
+            self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+            self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+        `;
+        const blob = new Blob([swCode], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(blob);
+        navigator.serviceWorker.register(swUrl).catch(() => {});
+    }
 
-document.getElementById('totalQty').innerText = allQuestions.length;
+    let deferredPrompt = null;
+    const overlay = document.getElementById('installPromptOverlay');
+    const installBtn = document.getElementById('installBtn');
 
-function getSignVisual(signType) {
-    if(signType === 'parkingP') return '<div class="sign-box" style="background:#2563eb; color:white;">P</div><span>পার্কিং চিহ্ন</span>';
-    if(signType === 'noEntry') return '<div class="sign-box" style="background:#dc2626; color:white;">🚫</div><span>প্রবেশ নিষেধ</span>';
-    if(signType === 'stop') return '<div class="sign-box" style="background:#dc2626; color:white;">STOP</div><span>থামুন</span>';
-    if(signType === 'noOvertake') return '<div class="sign-box" style="background:#dc2626; color:white;">🚫⬅️➡️</div><span>ওভারটেকিং নিষেধ</span>';
-    if(signType === 'noHorn') return '<div class="sign-box" style="background:#dc2626; color:white;">🔇</div><span>হর্ণ নিষেধ</span>';
-    if(signType === 'warning') return '<div class="sign-box" style="background:#facc15; color:#000;">⚠️</div><span>সতর্কতা</span>';
-    if(signType === 'speed') return '<div class="sign-box" style="background:#dc2626; color:white;">৫০</div><span>গতি সীমা</span>';
-    return '';
-}
+    // পপআপ দেখানোর শর্ত চেক
+    function shouldShowPrompt() {
+        if (window.matchMedia('(display-mode: standalone)').matches) return false;
+        if (localStorage.getItem('pwaPromptDismissed') === 'true') return false;
+        if (localStorage.getItem('pwaPromptInstalled') === 'true') return false;
+        return true;
+    }
 
-function renderStudy(filter) {
-    let filtered = allQuestions.filter(q => filter === 'all' ? true : q.category === filter);
-    const container = document.getElementById('studyList');
-    container.innerHTML = '';
-    filtered.forEach(q => {
-        let signHtml = q.signType ? `<div class="sign-visual">${getSignVisual(q.signType)}</div>` : '';
-        let optsHtml = '';
-        q.options.forEach((opt, idx) => {
-            const letter = String.fromCharCode(65+idx);
-            optsHtml += `<div class="opt"><span>${letter}.</span> ${opt}</div>`;
+    // পপআপ দেখান
+    function showInstallPrompt() {
+        if (!shouldShowPrompt()) return;
+        // সামান্য দেরি (3 সেকেন্ড)
+        setTimeout(() => {
+            if (deferredPrompt && shouldShowPrompt()) {
+                overlay.style.display = 'flex';
+            }
+        }, 3000);
+    }
+
+    // পপআপ লুকান ও ডিসমিস স্টেট সেভ
+    function dismissPrompt() {
+        overlay.style.display = 'none';
+        localStorage.setItem('pwaPromptDismissed', 'true');
+        // 7 দিন পর আবার দেখাবে (ঐচ্ছিক)
+        // localStorage.setItem('pwaPromptDismissedTime', Date.now());
+    }
+
+    // beforeinstallprompt ইভেন্ট
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallPrompt();
+    });
+
+    // ইন্সটল বাটন ক্লিক
+    installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            localStorage.setItem('pwaPromptInstalled', 'true');
+            localStorage.removeItem('pwaPromptDismissed');
+        } else {
+            // ইউজার রিজেক্ট করলে ডিসমিস
+            dismissPrompt();
+        }
+        deferredPrompt = null;
+        overlay.style.display = 'none';
+    });
+
+    // ব্যাকড্রপ (ওভারলে) ট্যাপ করলে ডিসমিস (ইন্সটল বাটন বাদে)
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            dismissPrompt();
+        }
+    });
+
+    // অ্যাপ ইন্সটল হয়ে গেলে পপআপ সরিয়ে ফেলা (appinstalled ইভেন্ট)
+    window.addEventListener('appinstalled', () => {
+        localStorage.setItem('pwaPromptInstalled', 'true');
+        overlay.style.display = 'none';
+        deferredPrompt = null;
+    });
+
+    // যদি ইতিমধ্যে স্ট্যান্ডএলোন মোডে থাকে তবে ডিসমিস
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        localStorage.setItem('pwaPromptInstalled', 'true');
+    }
+
+    // ========== ৬০টি প্রশ্ন ==========
+    const allQuestions = [
+        { id:1, text:"কুলিং ফ্যানের কাজ কী?", options:["রেডিয়েটরের পানি ঠান্ডা করা","ইঞ্জিন অয়েল ঠান্ডা করা","ব্রেক অয়েল ঠান্ডা করা","ব্যাটারি ঠান্ডা করা"], correct:0, category:"mechanism", signType:null },
+        { id:2, text:"টেম্পারেচার গেজ ইঞ্জিনের কী নির্দেশ করে?", options:["ইঞ্জিনের কার্যকরী তাপমাত্রা","গিয়ার বক্সের তাপমাত্রা","রেডিয়েটরের তাপমাত্রা","গাড়ির বাতাসের তাপমাত্রা"], correct:0, category:"mechanism", signType:null },
+        { id:3, text:"গাড়ি স্টার্ট না হওয়ার কারণ কী?", options:["ব্রেক অয়েল না থাকলে","গিয়ার অয়েল না থাকলে","প্রয়োজনীয় জ্বালানী না থাকলে","ক্র্যাঙ্কশ্যাফ্ট অয়েল না থাকলে"], correct:2, category:"mechanism", signType:null },
+        { id:4, text:"ব্রেক মাস্টার সিলিন্ডারে ব্রেক ফ্লুইড লেভেল কম থাকলে কী হতে পারে?", options:["ব্রেক ফেইল","ইঞ্জিন ওভারহিট","কালো ধোঁয়া","বিকট আওয়াজ"], correct:0, category:"mechanism", signType:null },
+        { id:5, text:"ক্লাচের কাজ কী?", options:["গাড়ির গতি কমানো","ইঞ্জিন ও গিয়ারবক্স সংযোগ ও বিচ্ছিন্ন করা","গাড়ি নিউট্রাল করা","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
+        { id:6, text:"ইঞ্জিন অতিরিক্ত গরম হওয়ার কারণ?", options:["কুলিং ফ্যান কাজ না করলে","রেডিয়েটরে পানি/কুল্যান্ট কম থাকলে","উপরের সবগুলি","ব্যাটারি ডেড"], correct:2, category:"mechanism", signType:null },
+        { id:7, text:"এয়ার ক্লিনারের কাজ কী?", options:["ইঞ্জিন ঠান্ডা করা","বাতাস ও পেট্রোল মিশ্রণ","বাতাস পরিষ্কার করা","ইঞ্জিন চালুতে সহায়তা"], correct:2, category:"mechanism", signType:null },
+        { id:8, text:"টায়ার অতিরিক্ত ক্ষয় হয় কেন?", options:["চাকার এলাইনমেন্ট সঠিক না থাকলে","বাতাসের চাপ কম/বেশি হলে","অতিরিক্ত মালামাল বহন করলে","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
+        { id:9, text:"পেট্রোল ইঞ্জিনের প্রতি সিলিন্ডারে কয়টি স্পার্ক প্লাগ থাকে?", options:["১টি","২টি","৩টি","৪টি"], correct:0, category:"mechanism", signType:null },
+        { id:10, text:"ফুয়েল ও বাতাস নির্দিষ্ট অনুপাতে মিশ্রিত করে ইঞ্জিনে সরবরাহ করে?", options:["এয়ার ক্লিনার","স্পার্ক প্লাগ","কার্বুরেটর","মিশ্রণ"], correct:2, category:"mechanism", signType:null },
+        { id:11, text:"রেডিয়েটরের প্রধান কাজ কী?", options:["পানি ঠান্ডা করা","রেডিও চালনা","জয়েন্ট পার্টস ঠিক করা","ইঞ্জিন গরম করা"], correct:0, category:"mechanism", signType:null },
+        { id:12, text:"ইঞ্জিনের কুলিং সিস্টেমে কুলিং মিডিয়া হিসেবে কী ব্যবহৃত হয়?", options:["তৈল","গ্যাস","পানি","ডিজেল"], correct:2, category:"mechanism", signType:null },
+        { id:13, text:"গিয়ার লিক করার কারণ কী?", options:["গিয়ারের দাঁত ভাঙ্গা থাকিলে","ক্লাচ ঠিকমতো কাজ না করলে","গিয়ার ভালোভাবে সংযোগ না হলে","উপরের সবগুলি"], correct:3, category:"mechanism", signType:null },
+        { id:14, text:"ফুয়েল লাইনে বাতাস প্রবেশের কারণে ফুয়েল সরবরাহ বন্ধ হয়ে যাওয়াকে বলে?", options:["এয়ার লক","ত্রৈপার লক","অটো লক","এন্টি লক"], correct:0, category:"mechanism", signType:null },
+        { id:15, text:"সাইলেন্সারের কাজ কী?", options:["শব্দ নিয়ন্ত্রণ করা","দূষণ নির্ধারণ","বায়ু দূষণমুক্ত করা","গরম বাতাস বের করা"], correct:0, category:"mechanism", signType:null },
+        { id:16, text:"হেড লাইট না জ্বললে প্রথমে কী চেক করবেন?", options:["নির্ধারিত ফিউজ","লাইন চেক","ইঞ্জিন অয়েল","সুইচ"], correct:0, category:"mechanism", signType:null },
+        { id:17, text:"টায়ার ফেটে গেলে করণীয়?", options:["তাত্ক্ষণিক ব্রেক","এক্সিলারেটর থেকে পা সরিয়ে স্টিয়ারিং ধরে রাখা","গিয়ার নিউট্রাল","গাড়ি একপাশে সরানো"], correct:1, category:"mechanism", signType:null },
+        { id:18, text:"হুইল অয়েল কোথায় দিতে হয়?", options:["হেড কভারে","ব্যাক কভারে","জয়েন্ট অংশে","ফুয়েল গেজে"], correct:0, category:"mechanism", signType:null },
+        { id:19, text:"ডিস্টিলড ওয়াটার কোথায় ঢালতে হয়?", options:["কার্বুরেটরে","রেডিয়েটারে","ব্যাটারিতে","উইন্ডস্ক্রিনে"], correct:2, category:"mechanism", signType:null },
+        { id:20, text:"গিয়ার পরিবর্তনের সময় কী করতে হবে?", options:["ব্রেক প্যাডেল চাপা","ক্লাচ প্যাডেল চাপা","এক্সিলারেটর চাপা","গতি কমাতে হবে"], correct:1, category:"mechanism", signType:null },
+        { id:21, text:"চলন্ত অবস্থায় ইঞ্জিন ওভারহিট হয়ে গেলে করণীয়?", options:["গাড়ি চালিয়ে যেতে হবে","পার্ক করে ইঞ্জিন ঠান্ডা হতে দিতে হবে","গাড়ি ব্লক করতে হবে","আস্তে আস্তে যেতে হবে"], correct:1, category:"duty", signType:null },
+        { id:22, text:"ইঞ্জিন অয়েলের মেয়াদ শেষ হলে কী পরিবর্তন জরুরি?", options:["এয়ার ফিল্টার","ইঞ্জিন অয়েল ফিল্টার","গিয়ার অয়েল ফিল্টার","ফুয়েল ফিল্টার"], correct:1, category:"duty", signType:null },
+        { id:23, text:"ইঞ্জিন অয়েল কত কিমি চলার পর বদলানো উচিত?", options:["২৫০০","৪০০০","৮০০০","প্রস্তুতকারক নির্দেশিকা অনুযায়ী"], correct:3, category:"duty", signType:null },
+        { id:24, text:"ব্যাটারিতে ইলেক্ট্রোলাইট লেভেল কমে গেলে কী ব্যবহার করবেন?", options:["নদীর পানি","মিনারেল ওয়াটার","ডিস্টিলড ওয়াটার","সাগরের পানি"], correct:2, category:"duty", signType:null },
+        { id:25, text:"চালক অপ্রাপ্ত গাড়ি পোস্টে একত্রিত দলের নিশ্চিত হয়ে জরিমানা?", options:["১০০ টাকা","২০০ টাকা","৫০০ টাকা","১০০০ টাকা"], correct:1, category:"duty", signType:null },
+        { id:26, text:"নিষিদ্ধ হর্ণ বাজালে জরিমানা?", options:["৫০ টাকা","১০০ টাকা","২০০ টাকা","৫০০ টাকা"], correct:1, category:"duty", signType:null },
+        { id:27, text:"শুকনো পাকা রাস্তায় ৫০ কিমি/ঘ গতিতে নিরাপদ দূরত্ব কত মিটার?", options:["১৫ মি","২০ মি","২৫ মি","৩০ মি"], correct:2, category:"duty", signType:null },
+        { id:28, text:"একটানা কত ঘন্টা গাড়ি চালানো যায়?", options:["৪ ঘন্টা","৫ ঘন্টা","৬ ঘন্টা","৮ ঘন্টা"], correct:1, category:"duty", signType:null },
+        { id:29, text:"গাড়ি চালানোর সময় সাইড মিরর কতবার দেখা উচিত?", options:["২-৪ বার","৪-৬ বার","৬-৮ বার","৮-১০ বার"], correct:2, category:"duty", signType:null },
+        { id:30, text:"অপেশাদার লাইসেন্সের জন্য ন্যূনতম বয়স?", options:["১৬ বছর","১৮ বছর","২০ বছর","২১ বছর"], correct:1, category:"duty", signType:null },
+        { id:31, text:"পেশাদার লাইসেন্সের জন্য ন্যূনতম বয়স?", options:["১৮ বছর","২০ বছর","২১ বছর","২৫ বছর"], correct:2, category:"duty", signType:null },
+        { id:32, text:"ফার্স্ট এইড মানে?", options:["প্রাথমিক চিকিৎসা","অ্যাম্বুলেন্স","দুর্ঘটনা প্রতিরোধ","আগুন নেভানো"], correct:0, category:"duty", signType:null },
+        { id:33, text:"রাজস্ব গাড়ির হেডলাইট মুখোমুখি হলে কী করা উচিত?", options:["অফ","ডিম (লো বিম)","হাইবিম","জ্বালিয়ে রাখা"], correct:1, category:"duty", signType:null },
+        { id:34, text:"ব্রেক ফেইলুর কারণ হতে পারে?", options:["ব্রেক ফ্লুইড কম","ব্রেক প্যাড শেষ","মাস্টার সিলিন্ডার ত্রুটি","উপরের সব"], correct:3, category:"duty", signType:null },
+        { id:35, text:"মোটরযান আইনে বীমার প্রয়োজন কেন?", options:["তৃতীয় পক্ষের নিরাপত্তা","গাড়ির নিরাপত্তা","চালকের নিরাপত্তা","সবগুলো"], correct:0, category:"duty", signType:null },
+        { id:36, text:"অবৈধ মোটরযান চালালে সর্বোচ্চ জরিমানা?", options:["৫০০","১০০০","২০০০","৫০০০"], correct:2, category:"duty", signType:null },
+        { id:37, text:"কোন স্থানে হর্ণ বাজানো উচিত নয়?", options:["হাসপাতাল","স্কুল","শান্তি এলাকা","সবকটি"], correct:3, category:"duty", signType:null },
+        { id:38, text:"ওভারটেকিং করার সময় করণীয়?", options:["সিগন্যাল দিয়ে","বাম দিক থেকে","ডান দিক থেকে সতর্কতা","ক ও গ"], correct:3, category:"duty", signType:null },
+        { id:39, text:"বৃষ্টিতে গাড়ি চালানোর সময় কী বাড়াতে হবে?", options:["গতি","সতর্কতা ও দূরত্ব","টায়ারের চাপ","ব্রেক"], correct:1, category:"duty", signType:null },
+        { id:40, text:"লাইসেন্স ছাড়া গাড়ি চালালে জরিমানা?", options:["১০০০","২০০০","৫০০০","১০০০০"], correct:1, category:"duty", signType:null },
+        { id:41, text:"লাল বৃত্তের ভিতরে সাদা অনুভূমিক রেখা চিহ্নের অর্থ?", options:["প্রবেশ নিষেধ","গতি সীমা","পার্কিং নিষেধ","ওভারটেক নিষেধ"], correct:0, category:"signs", signType:"noEntry" },
+        { id:42, text:"নীল বৃত্তের ভিতরে 'P' চিহ্ন মানে?", options:["পার্কিং স্থান","পথচারী পারাপার","পুলিশ স্টেশন","পেট্রোল পাম্প"], correct:0, category:"signs", signType:"parkingP" },
+        { id:43, text:"হলুদ ত্রিভুজের ভিতরে শিশু চিহ্ন মানে?", options:["স্কুল এলাকা","শিশু ক্রীড়া স্থান","সতর্কতা","পথচারী পারাপার"], correct:0, category:"signs", signType:"warning" },
+        { id:44, text:"লাল অষ্টভুজ STOP চিহ্নের অর্থ?", options:["থামুন","গতি কমিয়ে চলুন","পথ দিন","শুধু থামুন ও চলুন"], correct:0, category:"signs", signType:"stop" },
+        { id:45, text:"লাল বৃত্তের ভিতরে ৫০ লেখা মানে?", options:["গতি সীমা ৫০ কিমি/ঘ","৫০ মিটার দূরত্ব","৫০ টাকা জরিমানা","৫০ নম্বর সড়ক"], correct:0, category:"signs", signType:"speed" },
+        { id:46, text:"নীল আয়তক্ষেত্রের ভিতরে হাসপাতাল চিহ্ন মানে?", options:["হাসপাতাল","ডাক্তারখানা","প্রাথমিক চিকিৎসা","অ্যাম্বুলেন্স"], correct:0, category:"signs", signType:"info" },
+        { id:47, text:"লাল বৃত্তে ক্রস (X) ওভারটেকিং চিহ্ন মানে?", options:["ওভারটেকিং নিষেধ","ওভারটেকিং জোন","ওভারটেকিং সতর্ক","সামনে ওভারটেক"], correct:0, category:"signs", signType:"noOvertake" },
+        { id:48, text:"'হর্ন বাজানো নিষেধ' চিহ্নের বর্ণনা?", options:["লাল বৃত্তে হর্ণ","নীল বৃত্তে বাঁশি","লাল বৃত্তে ক্রস সহ হর্ণ","হলুদ ত্রিভুজ"], correct:2, category:"signs", signType:"noHorn" },
+        { id:49, text:"সামনে বামে মোড় নিষেধ চিহ্ন কোনটি?", options:["লাল বৃত্তে বাম তীর","নীল বৃত্তে বাম তীর","লাল ত্রিভুজে বাম তীর","হলুদ ডিম্বাকৃতি"], correct:0, category:"signs", signType:"noLeft" },
+        { id:50, text:"প্রবেশ নিষেধ চিহ্নের রং ও আকৃতি?", options:["লাল বৃত্ত","লাল ত্রিভুজ","নীল বৃত্ত","হলুদ বর্গ"], correct:0, category:"signs", signType:"noEntry" },
+        { id:51, text:"'একমুখী সড়ক' চিহ্নটি কেমন?", options:["নীল আয়তক্ষেত্রে সাদা তীর","লাল বৃত্তে তীর","হলুদ ত্রিভুজ","সবুজ বর্গ"], correct:0, category:"signs", signType:"oneWay" },
+        { id:52, text:"বিপদজনক বাঁক সতর্কতা চিহ্ন?", options:["হলুদ ত্রিভুজে কালো তীর","লাল বৃত্ত","নীল বর্গ","সাদা ত্রিভুজ"], correct:0, category:"signs", signType:"warning" },
+        { id:53, text:"পথচারী পারাপারের চিহ্ন কী রং?", options:["হলুদ ত্রিভুজে কালো মানুষ","লাল বৃত্ত","নীল বৃত্ত","সবুজ বর্গ"], correct:0, category:"signs", signType:"pedestrian" },
+        { id:54, text:"ট্রাক প্রবেশ নিষেধ চিহ্ন?", options:["লাল বৃত্তে ট্রাক","নীল বৃত্তে ট্রাক","হলুদ ত্রিভুজে ট্রাক","সাদা বর্গ"], correct:0, category:"signs", signType:"noTruck" },
+        { id:55, text:"পার্কিং নিষেধ চিহ্নের বৈশিষ্ট্য?", options:["লাল বৃত্তে P ও ক্রস","নীল বৃত্তে P","লাল ত্রিভুজে P","সবুজ P"], correct:0, category:"signs", signType:"noParking" },
+        { id:56, text:"যানবাহনের উচ্চতা সীমা চিহ্ন?", options:["লাল বৃত্তে মিটার সংখ্যা","নীল বর্গ","হলুদ ত্রিভুজ","সবুজ ত্রিভুজ"], correct:0, category:"signs", signType:"heightLimit" },
+        { id:57, text:"U-টার্ন নিষেধ চিহ্ন?", options:["লাল বৃত্তে U চিহ্ন ক্রস","নীল বৃত্তে U","হলুদ ত্রিভুজে U","সবুজ U"], correct:0, category:"signs", signType:"noUturn" },
+        { id:58, text:"'হাত দিন' চিহ্ন মানে?", options:["অন্য গাড়িকে পথ দিন","হাত বাড়ান","থামুন","সিগন্যাল দিন"], correct:0, category:"signs", signType:"giveWay" },
+        { id:59, text:"ডানে মোড় নিষেধ চিহ্ন?", options:["লাল বৃত্তে ডান তীর","নীল বৃত্তে ডান তীর","লাল ত্রিভুজ","হলুদ বর্গ"], correct:0, category:"signs", signType:"noRight" },
+        { id:60, text:"নীল বৃত্তে সোজা তীর চিহ্ন অর্থ?", options:["কেবল সোজা যান","বামে যান","ডানে যান","সামনে থামুন"], correct:0, category:"signs", signType:"straightOnly" }
+    ];
+
+    document.getElementById('totalQty').innerText = allQuestions.length;
+
+    function getSignVisual(signType) {
+        if(signType === 'parkingP') return '<div class="sign-box" style="background:#2563eb; color:white;">P</div><span>পার্কিং চিহ্ন</span>';
+        if(signType === 'noEntry') return '<div class="sign-box" style="background:#dc2626; color:white;">🚫</div><span>প্রবেশ নিষেধ</span>';
+        if(signType === 'stop') return '<div class="sign-box" style="background:#dc2626; color:white;">STOP</div><span>থামুন</span>';
+        if(signType === 'noOvertake') return '<div class="sign-box" style="background:#dc2626; color:white;">🚫⬌</div><span>ওভারটেক নিষেধ</span>';
+        if(signType === 'noHorn') return '<div class="sign-box" style="background:#dc2626; color:white;">🔇</div><span>হর্ণ নিষেধ</span>';
+        if(signType === 'warning') return '<div class="sign-box" style="background:#facc15; color:#000;">⚠️</div><span>সতর্কতা</span>';
+        if(signType === 'speed') return '<div class="sign-box" style="background:#dc2626; color:white;">৫০</div><span>গতি সীমা</span>';
+        if(signType === 'noLeft') return '<div class="sign-box" style="background:#dc2626; color:white;">⬅🚫</div><span>বামে নিষেধ</span>';
+        if(signType === 'noRight') return '<div class="sign-box" style="background:#dc2626; color:white;">➡🚫</div><span>ডানে নিষেধ</span>';
+        if(signType === 'noUturn') return '<div class="sign-box" style="background:#dc2626; color:white;">↩🚫</div><span>U-টার্ন নিষেধ</span>';
+        if(signType === 'noParking') return '<div class="sign-box" style="background:#dc2626; color:white;">P🚫</div><span>পার্কিং নিষেধ</span>';
+        if(signType === 'noTruck') return '<div class="sign-box" style="background:#dc2626; color:white;">🚛🚫</div><span>ট্রাক নিষেধ</span>';
+        if(signType === 'pedestrian') return '<div class="sign-box" style="background:#facc15; color:#000;">🚶</div><span>পথচারী পারাপার</span>';
+        if(signType === 'oneWay') return '<div class="sign-box" style="background:#2563eb; color:white;">➡</div><span>একমুখী সড়ক</span>';
+        if(signType === 'giveWay') return '<div class="sign-box" style="background:#facc15; color:#000;">✋</div><span>পথ দিন</span>';
+        if(signType === 'straightOnly') return '<div class="sign-box" style="background:#2563eb; color:white;">⬆</div><span>কেবল সোজা</span>';
+        if(signType === 'heightLimit') return '<div class="sign-box" style="background:#dc2626; color:white;">↕</div><span>উচ্চতা সীমা</span>';
+        if(signType === 'info') return '<div class="sign-box" style="background:#2563eb; color:white;">ℹ</div><span>তথ্য</span>';
+        return '';
+    }
+
+    function renderStudy(filter) {
+        let filtered = allQuestions.filter(q => filter === 'all' ? true : q.category === filter);
+        const container = document.getElementById('studyList');
+        container.innerHTML = '';
+        filtered.forEach(q => {
+            let signHtml = q.signType ? `<div class="sign-visual">${getSignVisual(q.signType)}</div>` : '';
+            let optsHtml = '';
+            q.options.forEach((opt, idx) => {
+                const letter = String.fromCharCode(65+idx);
+                optsHtml += `<div class="opt"><span>${letter}.</span> ${opt}</div>`;
+            });
+            container.innerHTML += `
+                <div class="qa-card">
+                    <div class="qa-question">❓ ${q.text}</div>
+                    ${signHtml}
+                    <div class="options">${optsHtml}</div>
+                    <div class="correct-ans"><i class="fas fa-check-circle"></i> সঠিক উত্তর: ${q.options[q.correct]}</div>
+                </div>
+            `;
         });
-        container.innerHTML += `
-            <div class="qa-card">
-                <div class="qa-question">❓ ${q.text}</div>
-                ${signHtml}
-                <div class="options">${optsHtml}</div>
-                <div class="correct-ans"><i class="fas fa-check-circle"></i> সঠিক উত্তর: ${q.options[q.correct]}</div>
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderStudy(btn.getAttribute('data-filter'));
+        });
+    });
+
+    let examQuestions = [], examAnswers = [], currentExamIndex = 0, examTimerInterval = null, examActive = false, timeLeft = 20;
+    function startExam() {
+        const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
+        examQuestions = shuffled.slice(0,20);
+        examAnswers = new Array(20).fill(null);
+        currentExamIndex = 0;
+        if(examTimerInterval) clearInterval(examTimerInterval);
+        examActive = true;
+        document.getElementById('totalExamQ').innerText = examQuestions.length;
+        renderExamQuestion();
+        startExamTimer();
+    }
+    function renderExamQuestion() {
+        const q = examQuestions[currentExamIndex];
+        const container = document.getElementById('examContainer');
+        let signHtml = q.signType ? `<div class="sign-visual" style="margin-bottom:10px;">${getSignVisual(q.signType)}</div>` : '';
+        let optsHtml = '';
+        const letters = ['ক', 'খ', 'গ', 'ঘ'];
+        q.options.forEach((opt, idx) => {
+            const isSelected = (examAnswers[currentExamIndex] === idx);
+            optsHtml += `<div class="exam-opt ${isSelected ? 'selected' : ''}" data-opt="${idx}">${letters[idx]}. ${opt}</div>`;
+        });
+        container.innerHTML = `
+            <div class="q-text">${currentExamIndex+1}. ${q.text}</div>
+            ${signHtml}
+            <div class="options-area">${optsHtml}</div>
+            <div class="action-btns">
+                <button id="prevExamBtn" class="btn btn-outline" ${currentExamIndex===0 ? 'disabled' : ''}>⬅ পূর্ববর্তী</button>
+                <button id="nextExamBtn" class="btn btn-primary">পরবর্তী ➡</button>
             </div>
         `;
-    });
-}
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderStudy(btn.getAttribute('data-filter'));
-    });
-});
-
-let examQuestions = [], examAnswers = [], currentExamIndex = 0, examTimerInterval = null, examActive = false, timeLeft = 20;
-function startExam() {
-    const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
-    examQuestions = shuffled.slice(0,20);
-    examAnswers = new Array(20).fill(null);
-    currentExamIndex = 0;
-    if(examTimerInterval) clearInterval(examTimerInterval);
-    examActive = true;
-    document.getElementById('totalExamQ').innerText = examQuestions.length;
-    renderExamQuestion();
-    startExamTimer();
-}
-function renderExamQuestion() {
-    const q = examQuestions[currentExamIndex];
-    const container = document.getElementById('examContainer');
-    let signHtml = q.signType ? `<div class="sign-visual" style="margin-bottom:12px;">${getSignVisual(q.signType)}</div>` : '';
-    let optsHtml = '';
-    const letters = ['ক', 'খ', 'গ', 'ঘ'];
-    q.options.forEach((opt, idx) => {
-        const isSelected = (examAnswers[currentExamIndex] === idx);
-        optsHtml += `<div class="exam-opt ${isSelected ? 'selected' : ''}" data-opt="${idx}">${letters[idx]}. ${opt}</div>`;
-    });
-    container.innerHTML = `
-        <div class="q-text">${currentExamIndex+1}. ${q.text}</div>
-        ${signHtml}
-        <div class="options-area">${optsHtml}</div>
-        <div class="action-btns">
-            <button id="prevExamBtn" class="btn btn-outline" ${currentExamIndex===0 ? 'disabled' : ''}>⬅ পূর্ববর্তী</button>
-            <button id="nextExamBtn" class="btn btn-primary">পরবর্তী ➡</button>
-        </div>
-    `;
-    document.querySelectorAll('.exam-opt').forEach(opt => {
-        opt.addEventListener('click', (e) => {
-            if(!examActive) return;
-            const val = parseInt(opt.getAttribute('data-opt'));
-            examAnswers[currentExamIndex] = val;
-            document.querySelectorAll('.exam-opt').forEach(o => o.classList.remove('selected'));
-            opt.classList.add('selected');
+        document.querySelectorAll('.exam-opt').forEach(opt => {
+            opt.addEventListener('click', () => {
+                if(!examActive) return;
+                const val = parseInt(opt.getAttribute('data-opt'));
+                examAnswers[currentExamIndex] = val;
+                document.querySelectorAll('.exam-opt').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+            });
         });
-    });
-    document.getElementById('prevExamBtn')?.addEventListener('click', () => { if(currentExamIndex>0) { currentExamIndex--; renderExamQuestion(); resetExamTimer(); } });
-    document.getElementById('nextExamBtn')?.addEventListener('click', () => { if(currentExamIndex+1 < examQuestions.length) { currentExamIndex++; renderExamQuestion(); resetExamTimer(); } else { finishExam(); } });
-    document.getElementById('qCounter').innerText = currentExamIndex+1;
-}
-function startExamTimer() {
-    if(examTimerInterval) clearInterval(examTimerInterval);
-    timeLeft = 20;
-    document.getElementById('examTimer').innerText = timeLeft;
-    examTimerInterval = setInterval(() => {
-        if(!examActive) return;
-        if(timeLeft <= 1) {
-            clearInterval(examTimerInterval);
-            if(currentExamIndex+1 < examQuestions.length) { currentExamIndex++; renderExamQuestion(); startExamTimer(); }
-            else { finishExam(); }
-        } else { timeLeft--; document.getElementById('examTimer').innerText = timeLeft; }
-    }, 1000);
-}
-function resetExamTimer() { if(examTimerInterval) clearInterval(examTimerInterval); startExamTimer(); }
-function finishExam() {
-    examActive = false;
-    clearInterval(examTimerInterval);
-    let correctCount = 0;
-    const wrongList = [];
-    for(let i=0;i<examQuestions.length;i++) {
-        const user = examAnswers[i];
-        const correctIdx = examQuestions[i].correct;
-        if(user === correctIdx) correctCount++;
-        else wrongList.push({ question: examQuestions[i].text, userAns: user!==null ? examQuestions[i].options[user] : "উত্তর দেননি", correctAns: examQuestions[i].options[correctIdx] });
+        document.getElementById('prevExamBtn')?.addEventListener('click', () => { if(currentExamIndex>0) { currentExamIndex--; renderExamQuestion(); resetExamTimer(); } });
+        document.getElementById('nextExamBtn')?.addEventListener('click', () => { if(currentExamIndex+1 < examQuestions.length) { currentExamIndex++; renderExamQuestion(); resetExamTimer(); } else { finishExam(); } });
+        document.getElementById('qCounter').innerText = currentExamIndex+1;
     }
-    const pass = correctCount >= 12;
-    const modal = document.getElementById('resultModal');
-    document.getElementById('modalTitle').innerHTML = pass ? '🎉 পাশ করেছেন!' : '😓 ফেল করেছেন';
-    document.getElementById('scoreSummary').innerHTML = `<div class="score-big">✅ সঠিক: ${correctCount} &nbsp;&nbsp;❌ ভুল/বাদ: ${examQuestions.length-correctCount}</div><p style="text-align:center">পাস মার্ক: ১২/${examQuestions.length}</p>`;
-    let wrongHtml = '<div style="margin-top:12px;"><strong>🔍 ভুল উত্তর ও সংশোধন:</strong></div>';
-    if(wrongList.length===0) wrongHtml += '<p>✨ সব উত্তর সঠিক! চমৎকার!</p>';
-    else wrongList.forEach(w => { wrongHtml += `<div class="wrong-item"><strong>প্রশ্ন:</strong> ${w.question}<br><span style="color:#dc2626;">❌ আপনার উত্তর: ${w.userAns}</span><br><span style="color:#006A4E;">✅ সঠিক উত্তর: ${w.correctAns}</span></div>`; });
-    document.getElementById('wrongDetails').innerHTML = wrongHtml;
-    modal.style.display = 'flex';
-}
-document.getElementById('forceFinishBtn').addEventListener('click', () => { if(examActive) finishExam(); });
-function closeModal() { document.getElementById('resultModal').style.display = 'none'; showPage('home'); }
-document.getElementById('closeModalX').addEventListener('click', closeModal);
-document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    function startExamTimer() {
+        if(examTimerInterval) clearInterval(examTimerInterval);
+        timeLeft = 20;
+        document.getElementById('examTimer').innerText = timeLeft;
+        examTimerInterval = setInterval(() => {
+            if(!examActive) return;
+            if(timeLeft <= 1) {
+                clearInterval(examTimerInterval);
+                if(currentExamIndex+1 < examQuestions.length) { currentExamIndex++; renderExamQuestion(); startExamTimer(); }
+                else { finishExam(); }
+            } else { timeLeft--; document.getElementById('examTimer').innerText = timeLeft; }
+        }, 1000);
+    }
+    function resetExamTimer() { if(examTimerInterval) clearInterval(examTimerInterval); startExamTimer(); }
+    function finishExam() {
+        examActive = false;
+        clearInterval(examTimerInterval);
+        let correctCount = 0;
+        const wrongList = [];
+        for(let i=0;i<examQuestions.length;i++) {
+            const user = examAnswers[i];
+            const correctIdx = examQuestions[i].correct;
+            if(user === correctIdx) correctCount++;
+            else wrongList.push({ question: examQuestions[i].text, userAns: user!==null ? examQuestions[i].options[user] : "উত্তর দেননি", correctAns: examQuestions[i].options[correctIdx] });
+        }
+        const pass = correctCount >= 12;
+        const modal = document.getElementById('resultModal');
+        document.getElementById('modalTitle').innerHTML = pass ? '🎉 পাশ করেছেন!' : '😓 ফেল করেছেন';
+        document.getElementById('scoreSummary').innerHTML = `<div class="score-big">✅ সঠিক: ${correctCount} &nbsp;&nbsp;❌ ভুল/বাদ: ${examQuestions.length-correctCount}</div><p style="text-align:center;font-size:0.85rem;">পাস মার্ক: ১২/${examQuestions.length}</p>`;
+        let wrongHtml = '<div style="margin-top:10px;"><strong>🔍 ভুল উত্তর ও সংশোধন:</strong></div>';
+        if(wrongList.length===0) wrongHtml += '<p style="color:#006A4E;">✨ সব উত্তর সঠিক! চমৎকার!</p>';
+        else wrongList.forEach(w => { wrongHtml += `<div class="wrong-item"><strong>প্রশ্ন:</strong> ${w.question}<br><span style="color:#dc2626;">❌ আপনার উত্তর: ${w.userAns}</span><br><span style="color:#006A4E;">✅ সঠিক উত্তর: ${w.correctAns}</span></div>`; });
+        document.getElementById('wrongDetails').innerHTML = wrongHtml;
+        modal.style.display = 'flex';
+    }
+    document.getElementById('forceFinishBtn').addEventListener('click', () => { if(examActive) finishExam(); });
+    function closeModal() { document.getElementById('resultModal').style.display = 'none'; showPage('home'); }
+    document.getElementById('closeModalX').addEventListener('click', closeModal);
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
 
-function openTrafficSignPdf() { window.open('icondriving.pdf', '_blank'); }
-document.getElementById('openPdfBtn').addEventListener('click', openTrafficSignPdf);
+    function openTrafficSignPdf() { window.open('icondriving.pdf', '_blank'); }
 
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-    document.getElementById(pageId+'Page').classList.add('active-page');
-    if(pageId === 'study') renderStudy('all');
-    if(pageId === 'exam') startExam();
-}
-document.querySelectorAll('.menu-btn[data-page]').forEach(btn => btn.addEventListener('click', (e) => showPage(btn.getAttribute('data-page'))));
-document.getElementById('goStudyBtn').addEventListener('click', () => showPage('study'));
-document.getElementById('goExamBtn').addEventListener('click', () => showPage('exam'));
-showPage('home');
+    function updateBottomNavActive(pageId) {
+        document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(item => {
+            item.classList.toggle('active', item.getAttribute('data-page') === pageId);
+        });
+    }
+    function showPage(pageId) {
+        if(examTimerInterval) { clearInterval(examTimerInterval); examTimerInterval = null; }
+        examActive = false;
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+        const targetPage = document.getElementById(pageId+'Page');
+        if(targetPage) targetPage.classList.add('active-page');
+        if(pageId === 'study') renderStudy('all');
+        if(pageId === 'exam') startExam();
+        updateBottomNavActive(pageId);
+        window.scrollTo({ top:0, behavior:'smooth' });
+    }
+    document.querySelectorAll('.bottom-nav .nav-item[data-page]').forEach(item => {
+        item.addEventListener('click', () => showPage(item.getAttribute('data-page')));
+    });
+    document.getElementById('bottomNavSigns').addEventListener('click', openTrafficSignPdf);
+    document.getElementById('goStudyBtn').addEventListener('click', () => showPage('study'));
+    document.getElementById('goExamBtn').addEventListener('click', () => showPage('exam'));
+
+    showPage('home');
 </script>
 </body>
 </html>
