@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</title>
-    
+
     <!-- PWA meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ড্রাইভিং লাইসেন্স">
     <link rel="apple-touch-icon" href="driving-licence.png">
     <meta name="theme-color" content="#006A4E">
-    <link rel="manifest" href="manifest.json">
-    
+    <link rel="manifest" id="manifestLink" href="data:application/json;base64,">
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="driving-licence.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -24,7 +24,6 @@
             --accent: #f59e0b;
             --accent-light: #fbbf24;
             --danger: #ef4444;
-            --danger-light: #f87171;
             --bg: #f0f4f8;
             --card: #ffffff;
             --text: #1e293b;
@@ -55,7 +54,6 @@
             min-height: 100vh;
         }
 
-        /* ========== হেডার ========== */
         .gov-header {
             background: linear-gradient(135deg, #004d38 0%, #006A4E 40%, #008060 100%);
             color: white;
@@ -74,32 +72,17 @@
             gap: 6px;
         }
         .gov-header .flag { font-size: 1.3rem; }
-        @media (max-width:400px) {
-            .gov-header { font-size: 0.9rem; padding: 0.45rem 0.6rem; }
-        }
+        @media (max-width:400px) { .gov-header { font-size: 0.9rem; padding: 0.45rem 0.6rem; } }
 
-        /* ========== ড্যাশবোর্ড ========== */
         .dashboard {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 0.5rem 0.6rem;
-            padding: 0.5rem 0.6rem;
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
+            margin: 0.5rem 0.6rem; padding: 0.5rem 0.6rem; background: var(--card);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
         }
         .dash-card {
-            text-align: center;
-            background: #f8fafc;
-            padding: 0.35rem 0.7rem;
-            border-radius: 16px;
-            min-width: 70px;
-            flex: 1;
-            max-width: 110px;
-            transition: var(--transition);
-            border: 1px solid transparent;
+            text-align: center; background: #f8fafc; padding: 0.35rem 0.7rem;
+            border-radius: 16px; min-width: 70px; flex: 1; max-width: 110px;
+            transition: var(--transition); border: 1px solid transparent;
         }
         .dash-card:hover { border-color: #dce4ec; transform: translateY(-1px); }
         .dash-card h4 { font-size: 0.65rem; color: var(--text-light); margin-bottom: 2px; letter-spacing: 0.3px; }
@@ -107,13 +90,10 @@
         @media (max-width:400px) {
             .dashboard { gap: 0.3rem; margin: 0.3rem 0.4rem; padding: 0.4rem; }
             .dash-card { padding: 0.25rem 0.4rem; min-width: 55px; border-radius: 12px; }
-            .dash-card h4 { font-size: 0.6rem; }
-            .dash-card p { font-size: 0.95rem; }
+            .dash-card h4 { font-size: 0.6rem; } .dash-card p { font-size: 0.95rem; }
         }
 
-        /* ========== কন্টেইনার ========== */
         .container { max-width: 900px; margin: 0 auto; padding: 0 0.5rem 0.5rem; }
-
         .page { display: none; animation: fadeIn 0.25s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
@@ -142,7 +122,6 @@
         .correct-ans { background: #e6f7e6; padding: 8px 12px; border-radius: 14px; margin-top: 8px; font-size: 0.8rem; border: 1px solid #c8e6c9; }
         .correct-ans i { color: var(--primary); }
 
-        /* ========== পরীক্ষা ========== */
         .exam-header {
             background: var(--card); border-radius: var(--radius-lg); padding: 0.5rem 0.8rem; margin-bottom: 0.8rem;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: var(--shadow-sm);
@@ -173,7 +152,6 @@
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
         .btn-outline:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
-        /* ========== মোডাল ========== */
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index:1000; padding:1rem; backdrop-filter: blur(2px); }
         .modal-content { background: white; max-width:500px; width:100%; max-height:85vh; overflow-y: auto; border-radius: var(--radius-xl); padding:1.2rem; position: relative; box-shadow: var(--shadow-lg); animation: modalIn 0.25s ease; }
         @keyframes modalIn { from{ opacity:0; transform: scale(0.9) translateY(20px); } to{ opacity:1; transform: scale(1) translateY(0); } }
@@ -182,7 +160,6 @@
         .score-big { font-size:1.8rem; font-weight:800; text-align:center; background:#f1f5f9; padding:0.5rem; border-radius:24px; margin:0.8rem 0; color:var(--primary); border:2px dashed #dce4ec; }
         .wrong-item { border-bottom:1px solid #e2e8f0; padding:0.6rem 0; font-size:0.8rem; line-height:1.5; }
 
-        /* ========== আবেদন পেজ ========== */
         .apply-card { background: var(--card); border-radius: var(--radius-lg); padding:1rem 1.1rem; margin-bottom:0.6rem; box-shadow: var(--shadow-sm); }
         .apply-card h2,.apply-card h3 { font-size:1rem; margin-bottom:0.5rem; color:#0f172a; }
         .apply-card h3 { font-size:0.9rem; }
@@ -193,21 +170,14 @@
         .step-item:last-child { border-bottom:none; }
         .step-num { background: var(--primary); color:white; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.75rem; flex-shrink:0; }
 
-        /* ========== বটম নেভিগেশন (হালকা গোলাকার) ========== */
         .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(12px);
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: var(--nav-height);
-            padding: 0 4px;
+            display: flex; justify-content: space-around; align-items: center;
+            height: var(--nav-height); padding: 0 4px;
             padding-bottom: env(safe-area-inset-bottom, 4px);
-            z-index: 100;
-            border-top: 1px solid #e8ecf1;
+            z-index: 100; border-top: 1px solid #e8ecf1;
             box-shadow: 0 -2px 16px rgba(0,0,0,0.06);
             border-radius: 20px 20px 0 0;
         }
@@ -231,13 +201,10 @@
         .nav-item.signs-btn i { font-size: 1.2rem; }
         .nav-item.signs-btn:hover { background: rgba(245,158,11,0.06); }
         @media (max-width:360px) {
-            .nav-item i { font-size: 1.1rem; }
-            .nav-item .nav-label { font-size: 0.55rem; }
-            .nav-item { padding: 4px 1px; gap: 2px; }
-            .bottom-nav { height: 54px; }
+            .nav-item i { font-size: 1.1rem; } .nav-item .nav-label { font-size: 0.55rem; }
+            .nav-item { padding: 4px 1px; gap: 2px; } .bottom-nav { height: 54px; }
         }
 
-        /* ========== ফুটার ও ক্রেডিট কার্ড (আন্ডারলাইন রিমুভ) ========== */
         .professional-footer {
             background: #0f2b2b; color: #cbd5e1; margin-top: 1.5rem;
             border-top: 3px solid #f5b042;
@@ -259,35 +226,17 @@
             margin: 6px 0; font-size: 0.8rem; text-decoration: none !important;
         }
         .apply-btn:hover { background: #ffaa2b; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245,176,66,0.35); }
-
-        /* উন্নত ক্রেডিট কার্ড (আন্ডারলাইন সম্পূর্ণ রিমুভ) */
         .credit-card {
             background: linear-gradient(135deg, #1e3a3a, #0f2b2b);
-            padding: 12px 18px;
-            border-radius: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-            border: 1px solid rgba(245,176,66,0.3);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            padding: 12px 18px; border-radius: 30px; display: inline-flex;
+            align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 12px;
+            border: 1px solid rgba(245,176,66,0.3); box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        .credit-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-        .credit-label {
-            font-size: 12px; font-weight: 500; color: #b9d4df;
-            display: flex; align-items: center; gap: 5px;
-        }
+        .credit-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+        .credit-label { font-size: 12px; font-weight: 500; color: #b9d4df; display: flex; align-items: center; gap: 5px; }
         .credit-label i { color: #f5b042; font-size: 0.9rem; }
-        .credit-name-link {
-            text-decoration: none !important;
-            color: inherit;
-            display: inline-block;
-        }
+        .credit-name-link { text-decoration: none !important; color: inherit; display: inline-block; }
         .credit-name {
             font-size: 16px; font-weight: 700; color: #fff;
             background: rgba(245,176,66,0.15); padding: 4px 14px;
@@ -296,12 +245,9 @@
             display: flex; align-items: center; gap: 6px;
             text-decoration: none !important;
         }
-        .credit-name-link:hover .credit-name {
-            background: rgba(245,176,66,0.3); border-color: #f5b042;
-        }
+        .credit-name-link:hover .credit-name { background: rgba(245,176,66,0.3); border-color: #f5b042; }
         .credit-name i { color: #f5b042; font-size: 1rem; }
         .credit-name span { color: #f5b042; text-decoration: none !important; }
-
         .contact-section { margin-top: 10px; text-align: left; }
         .contact-text { font-size: 0.75rem; color: #b9d4df; margin-bottom: 6px; }
         .contact-icons { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -313,8 +259,6 @@
         .contact-icons a:hover { background: #f5b042; color: #0f2b2b; transform: translateY(-2px); }
         .contact-icons i { font-size: 1rem; }
         .footer-bottom { text-align: center; padding: 0.8rem; font-size: 0.7rem; color: #94a3b8; }
-
-        /* ========== PWA ইনস্টল পপআপ ========== */
         .install-prompt-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); z-index: 200;
@@ -322,13 +266,9 @@
             padding-bottom: 90px;
         }
         .install-prompt-card {
-            background: white;
-            border-radius: 28px 28px 16px 16px;
-            padding: 1.2rem 1.2rem 1rem;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+            background: white; border-radius: 28px 28px 16px 16px;
+            padding: 1.2rem 1.2rem 1rem; max-width: 400px; width: 90%;
+            text-align: center; box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
             animation: slideUp 0.3s ease;
         }
         @keyframes slideUp { from { transform: translateY(100px); opacity:0; } to { transform: translateY(0); opacity:1; } }
@@ -340,18 +280,13 @@
             box-shadow: 0 3px 10px rgba(0,106,78,0.3); transition: 0.2s;
         }
         .install-btn:hover { background: #008060; transform: translateY(-1px); }
-
         @media (max-width:640px) {
-            .q-text { font-size: 0.9rem; }
-            .exam-opt { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
-            .score-big { font-size: 1.3rem; }
-            .footer-container { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
+            .q-text { font-size: 0.9rem; } .exam-opt { font-size: 0.78rem; padding: 0.5rem 0.8rem; }
+            .score-big { font-size: 1.3rem; } .footer-container { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
             .footer-col h3 { border-left: none; text-align: center; }
             .credit-card, .contact-icons { width: 100%; justify-content: center; }
-            .contact-section { text-align: center; }
-            .contact-icons { flex-direction: row; justify-content: center; }
-            .qa-card { padding: 0.6rem 0.8rem; }
-            .question-card { padding: 0.8rem; }
+            .contact-section { text-align: center; } .contact-icons { flex-direction: row; justify-content: center; }
+            .qa-card { padding: 0.6rem 0.8rem; } .question-card { padding: 0.8rem; }
             .install-prompt-overlay { padding-bottom: 70px; }
         }
     </style>
@@ -444,7 +379,6 @@
     </div>
 </div>
 
-<!-- বটম নেভিগেশন -->
 <nav class="bottom-nav" id="bottomNav">
     <button class="nav-item active" data-page="home"><i class="fas fa-home"></i><span class="nav-label">হোম</span></button>
     <button class="nav-item" data-page="study"><i class="fas fa-book-open"></i><span class="nav-label">প্রশ্ন</span></button>
@@ -453,7 +387,6 @@
     <button class="nav-item signs-btn" id="bottomNavSigns"><i class="fas fa-traffic-light"></i><span class="nav-label">চিহ্ন</span></button>
 </nav>
 
-<!-- ফুটার -->
 <footer class="professional-footer">
     <div class="footer-container">
         <div class="footer-col">
@@ -475,13 +408,10 @@
             <p>বাংলাদেশ সচিবালয়, ঢাকা-১০০০</p>
             <p><i class="fas fa-envelope"></i> info@brta.gov.bd</p>
             <p><i class="fas fa-phone-alt"></i> হটলাইন: ১৬১০০</p>
-            <!-- উন্নত ক্রেডিট কার্ড (আন্ডারলাইন রিমুভ) -->
             <div class="credit-card">
                 <span class="credit-label"><i class="fas fa-tools"></i> প্রণয়ন ও ডিজাইন</span>
                 <a href="https://ah-nayon.github.io/web/" target="_blank" rel="noopener noreferrer" class="credit-name-link">
-                    <div class="credit-name">
-                        <i class="fas fa-code"></i> <span>সুইট বয় নয়ন</span>
-                    </div>
+                    <div class="credit-name"><i class="fas fa-code"></i> <span>সুইট বয় নয়ন</span></div>
                 </a>
             </div>
             <div class="contact-section">
@@ -498,7 +428,6 @@
     </div>
 </footer>
 
-<!-- PWA ইনস্টল পপআপ (কোনো X বাটন নেই, ব্যাকড্রপ ট্যাপে ডিসমিস) -->
 <div id="installPromptOverlay" class="install-prompt-overlay">
     <div class="install-prompt-card">
         <h4><i class="fas fa-download"></i> অ্যাপ ইন্সটল করুন</h4>
@@ -507,7 +436,6 @@
     </div>
 </div>
 
-<!-- রেজাল্ট মোডাল -->
 <div id="resultModal" class="modal">
     <div class="modal-content">
         <span class="modal-close" id="closeModalX">&times;</span>
@@ -519,24 +447,37 @@
 </div>
 
 <script>
-    // ========== PWA ইনস্টল ও সার্ভিস ওয়ার্কার ==========
-    // সার্ভিস ওয়ার্কার রেজিস্ট্রেশন (ব্লব দিয়ে)
+    // ========== ম্যানিফেস্ট ও PWA সেটআপ ==========
+    (function() {
+        const manifest = {
+            name: "বাংলাদেশ ড্রাইভিং লাইসেন্স",
+            short_name: "ড্রাইভিং লাইসেন্স",
+            start_url: location.href,
+            display: "standalone",
+            background_color: "#006A4E",
+            theme_color: "#006A4E",
+            icons: [{
+                src: "driving-licence.png",
+                sizes: "192x192",
+                type: "image/png"
+            }]
+        };
+        const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+        document.getElementById('manifestLink').href = URL.createObjectURL(blob);
+    })();
+
     if ('serviceWorker' in navigator) {
-        const swCode = `
-            self.addEventListener('install', e => self.skipWaiting());
-            self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-            self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
-        `;
-        const blob = new Blob([swCode], { type: 'application/javascript' });
-        const swUrl = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(swUrl).catch(() => {});
+        const swCode = `self.addEventListener('install', e => self.skipWaiting());
+                         self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+                         self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));`;
+        const swBlob = new Blob([swCode], { type: 'application/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
     }
 
     let deferredPrompt = null;
     const overlay = document.getElementById('installPromptOverlay');
     const installBtn = document.getElementById('installBtn');
 
-    // পপআপ দেখানোর শর্ত চেক
     function shouldShowPrompt() {
         if (window.matchMedia('(display-mode: standalone)').matches) return false;
         if (localStorage.getItem('pwaPromptDismissed') === 'true') return false;
@@ -544,10 +485,8 @@
         return true;
     }
 
-    // পপআপ দেখান
     function showInstallPrompt() {
         if (!shouldShowPrompt()) return;
-        // সামান্য দেরি (3 সেকেন্ড)
         setTimeout(() => {
             if (deferredPrompt && shouldShowPrompt()) {
                 overlay.style.display = 'flex';
@@ -555,22 +494,17 @@
         }, 3000);
     }
 
-    // পপআপ লুকান ও ডিসমিস স্টেট সেভ
     function dismissPrompt() {
         overlay.style.display = 'none';
         localStorage.setItem('pwaPromptDismissed', 'true');
-        // 7 দিন পর আবার দেখাবে (ঐচ্ছিক)
-        // localStorage.setItem('pwaPromptDismissedTime', Date.now());
     }
 
-    // beforeinstallprompt ইভেন্ট
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
         showInstallPrompt();
     });
 
-    // ইন্সটল বাটন ক্লিক
     installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
@@ -579,28 +513,22 @@
             localStorage.setItem('pwaPromptInstalled', 'true');
             localStorage.removeItem('pwaPromptDismissed');
         } else {
-            // ইউজার রিজেক্ট করলে ডিসমিস
             dismissPrompt();
         }
         deferredPrompt = null;
         overlay.style.display = 'none';
     });
 
-    // ব্যাকড্রপ (ওভারলে) ট্যাপ করলে ডিসমিস (ইন্সটল বাটন বাদে)
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            dismissPrompt();
-        }
+        if (e.target === overlay) dismissPrompt();
     });
 
-    // অ্যাপ ইন্সটল হয়ে গেলে পপআপ সরিয়ে ফেলা (appinstalled ইভেন্ট)
     window.addEventListener('appinstalled', () => {
         localStorage.setItem('pwaPromptInstalled', 'true');
         overlay.style.display = 'none';
         deferredPrompt = null;
     });
 
-    // যদি ইতিমধ্যে স্ট্যান্ডএলোন মোডে থাকে তবে ডিসমিস
     if (window.matchMedia('(display-mode: standalone)').matches) {
         localStorage.setItem('pwaPromptInstalled', 'true');
     }
