@@ -4,76 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</title>
-
+    
     <!-- PWA meta tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="ড্রাইভিং লাইসেন্স">
+    <meta name="apple-mobile-web-app-title" content="Driving Test BD">
     <link rel="apple-touch-icon" href="driving-licence.png">
     <meta name="theme-color" content="#006A4E">
     <link rel="manifest" id="manifestLink" href="data:application/json;base64,">
-
+    
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="driving-licence.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #006A4E;
-            --primary-light: #008060;
-            --primary-dark: #004d38;
-            --accent: #f59e0b;
-            --accent-light: #fbbf24;
-            --danger: #ef4444;
-            --bg: #f0f4f8;
-            --card: #ffffff;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --nav-height: 62px;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-            --shadow: 0 2px 10px rgba(0,0,0,0.08);
+            --primary: #006A4E; --primary-light: #008060; --primary-dark: #004d38;
+            --accent: #f59e0b; --accent-light: #fbbf24; --danger: #ef4444;
+            --bg: #f0f4f8; --card: #ffffff; --text: #1e293b; --text-light: #64748b;
+            --border: #e2e8f0; --nav-height: 62px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06); --shadow: 0 2px 10px rgba(0,0,0,0.08);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
-            --radius-sm: 12px;
-            --radius: 18px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
+            --radius-sm: 12px; --radius: 18px; --radius-lg: 24px; --radius-xl: 32px;
             --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: 'Noto Sans Bengali', sans-serif;
-            background: #e8edf2;
-            color: var(--text);
-            font-size: 13.5px;
-            line-height: 1.5;
-            -webkit-tap-highlight-color: transparent;
+            font-family: 'Noto Sans Bengali', sans-serif; background: #e8edf2; color: var(--text);
+            font-size: 13.5px; line-height: 1.5; -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
             padding-bottom: calc(var(--nav-height) + env(safe-area-inset-bottom, 8px) + 16px);
             min-height: 100vh;
         }
-
         .gov-header {
             background: linear-gradient(135deg, #004d38 0%, #006A4E 40%, #008060 100%);
-            color: white;
-            padding: 0.55rem 0.8rem;
-            text-align: center;
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 12px rgba(0,106,78,0.25);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            color: white; padding: 0.55rem 0.8rem; text-align: center; font-size: 1.05rem;
+            font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 2px 12px rgba(0,106,78,0.25);
+            position: sticky; top: 0; z-index: 50; display: flex; align-items: center;
+            justify-content: center; gap: 6px;
         }
         .gov-header .flag { font-size: 1.3rem; }
         @media (max-width:400px) { .gov-header { font-size: 0.9rem; padding: 0.45rem 0.6rem; } }
-
         .dashboard {
             display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;
             margin: 0.5rem 0.6rem; padding: 0.5rem 0.6rem; background: var(--card);
@@ -92,12 +62,10 @@
             .dash-card { padding: 0.25rem 0.4rem; min-width: 55px; border-radius: 12px; }
             .dash-card h4 { font-size: 0.6rem; } .dash-card p { font-size: 0.95rem; }
         }
-
         .container { max-width: 900px; margin: 0 auto; padding: 0 0.5rem 0.5rem; }
         .page { display: none; animation: fadeIn 0.25s ease; }
         .active-page { display: block; }
         @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
-
         .filter-group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; padding: 0 2px; }
         .filter-btn {
             background: #eef2ff; border: 1.5px solid transparent; padding: 0.35rem 0.8rem;
@@ -106,7 +74,6 @@
         }
         .filter-btn:hover { background: #dde4ff; border-color: #c7d2fe; }
         .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 8px rgba(0,106,78,0.3); font-weight: 700; }
-
         .qa-list { display: flex; flex-direction: column; gap: 0.7rem; }
         .qa-card {
             background: var(--card); border-radius: var(--radius); padding: 0.8rem 1rem;
@@ -121,7 +88,6 @@
         .opt span { font-weight: 700; color: var(--primary); min-width: 16px; }
         .correct-ans { background: #e6f7e6; padding: 8px 12px; border-radius: 14px; margin-top: 8px; font-size: 0.8rem; border: 1px solid #c8e6c9; }
         .correct-ans i { color: var(--primary); }
-
         .exam-header {
             background: var(--card); border-radius: var(--radius-lg); padding: 0.5rem 0.8rem; margin-bottom: 0.8rem;
             display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-shadow: var(--shadow-sm);
@@ -151,7 +117,6 @@
         .btn-outline { background: white; border: 2px solid #cbd5e1; color: #475569; }
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
         .btn-outline:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
-
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index:1000; padding:1rem; backdrop-filter: blur(2px); }
         .modal-content { background: white; max-width:500px; width:100%; max-height:85vh; overflow-y: auto; border-radius: var(--radius-xl); padding:1.2rem; position: relative; box-shadow: var(--shadow-lg); animation: modalIn 0.25s ease; }
         @keyframes modalIn { from{ opacity:0; transform: scale(0.9) translateY(20px); } to{ opacity:1; transform: scale(1) translateY(0); } }
@@ -159,7 +124,6 @@
         .modal-close:hover { color:#dc2626; background:#fef2f2; }
         .score-big { font-size:1.8rem; font-weight:800; text-align:center; background:#f1f5f9; padding:0.5rem; border-radius:24px; margin:0.8rem 0; color:var(--primary); border:2px dashed #dce4ec; }
         .wrong-item { border-bottom:1px solid #e2e8f0; padding:0.6rem 0; font-size:0.8rem; line-height:1.5; }
-
         .apply-card { background: var(--card); border-radius: var(--radius-lg); padding:1rem 1.1rem; margin-bottom:0.6rem; box-shadow: var(--shadow-sm); }
         .apply-card h2,.apply-card h3 { font-size:1rem; margin-bottom:0.5rem; color:#0f172a; }
         .apply-card h3 { font-size:0.9rem; }
@@ -169,7 +133,6 @@
         .step-item { display:flex; align-items:baseline; gap:10px; padding:7px 0; border-bottom:1px dashed #dce4ec; font-size:0.8rem; }
         .step-item:last-child { border-bottom:none; }
         .step-num { background: var(--primary); color:white; width:26px; height:26px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:0.75rem; flex-shrink:0; }
-
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
@@ -204,7 +167,6 @@
             .nav-item i { font-size: 1.1rem; } .nav-item .nav-label { font-size: 0.55rem; }
             .nav-item { padding: 4px 1px; gap: 2px; } .bottom-nav { height: 54px; }
         }
-
         .professional-footer {
             background: #0f2b2b; color: #cbd5e1; margin-top: 1.5rem;
             border-top: 3px solid #f5b042;
@@ -259,6 +221,8 @@
         .contact-icons a:hover { background: #f5b042; color: #0f2b2b; transform: translateY(-2px); }
         .contact-icons i { font-size: 1rem; }
         .footer-bottom { text-align: center; padding: 0.8rem; font-size: 0.7rem; color: #94a3b8; }
+
+        /* PWA ইনস্টল পপআপ */
         .install-prompt-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); z-index: 200;
@@ -293,9 +257,7 @@
 </head>
 <body>
 
-<div class="gov-header">
-    <span class="flag">🇧🇩</span> বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র
-</div>
+<div class="gov-header"><span class="flag">🇧🇩</span> বাংলাদেশ ড্রাইভিং লাইসেন্স অনলাইন পরিক্ষা কেন্দ্র</div>
 
 <div class="dashboard">
     <div class="dash-card"><h4>📚 মোট প্রশ্ন</h4><p id="totalQty">0</p></div>
@@ -316,7 +278,6 @@
             </div>
         </div>
     </div>
-
     <div id="studyPage" class="page">
         <div class="filter-group">
             <button class="filter-btn active" data-filter="all">সব (৬০)</button>
@@ -326,7 +287,6 @@
         </div>
         <div id="studyList" class="qa-list"></div>
     </div>
-
     <div id="examPage" class="page">
         <div class="exam-header">
             <div class="q-counter">📋 প্রশ্ন <span id="qCounter">1</span>/<span id="totalExamQ">20</span></div>
@@ -335,7 +295,6 @@
         </div>
         <div id="examContainer" class="question-card"></div>
     </div>
-
     <div id="applyPage" class="page">
         <div class="apply-card">
             <h2><i class="fas fa-id-card"></i> ড্রাইভিং লাইসেন্স আবেদন - প্রয়োজনীয় ডকুমেন্ট</h2>
@@ -428,6 +387,7 @@
     </div>
 </footer>
 
+<!-- PWA ইনস্টল পপআপ -->
 <div id="installPromptOverlay" class="install-prompt-overlay">
     <div class="install-prompt-card">
         <h4><i class="fas fa-download"></i> অ্যাপ ইন্সটল করুন</h4>
@@ -450,8 +410,8 @@
     // ========== ম্যানিফেস্ট ও PWA সেটআপ ==========
     (function() {
         const manifest = {
-            name: "বাংলাদেশ ড্রাইভিং লাইসেন্স",
-            short_name: "ড্রাইভিং লাইসেন্স",
+            name: "BD Driving License",
+            short_name: "Driving Test",
             start_url: location.href,
             display: "standalone",
             background_color: "#006A4E",
@@ -474,18 +434,22 @@
         navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
     }
 
+    // ========== PWA ইনস্টল প্রম্পট (সর্বদা দেখাবে যদি ইন্সটল না থাকে) ==========
     let deferredPrompt = null;
     const overlay = document.getElementById('installPromptOverlay');
     const installBtn = document.getElementById('installBtn');
 
+    // পপআপ দেখানোর শর্ত: শুধু ইন্সটল না থাকলে
     function shouldShowPrompt() {
-        if (window.matchMedia('(display-mode: standalone)').matches) return false;
-        if (localStorage.getItem('pwaPromptDismissed') === 'true') return false;
-        if (localStorage.getItem('pwaPromptInstalled') === 'true') return false;
+        // যদি অ্যাপ ইন্সটল করা থাকে (স্ট্যান্ডএলোন বা আইওএস স্ট্যান্ডএলোন)
+        if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
+            return false;
+        }
+        // ইন্সটল করা না থাকলে সর্বদা দেখাবে (কোনো ডিসমিস মেমোরি নেই)
         return true;
     }
 
-    function showInstallPrompt() {
+    function checkAndShowPrompt() {
         if (!shouldShowPrompt()) return;
         setTimeout(() => {
             if (deferredPrompt && shouldShowPrompt()) {
@@ -494,43 +458,49 @@
         }, 3000);
     }
 
-    function dismissPrompt() {
-        overlay.style.display = 'none';
-        localStorage.setItem('pwaPromptDismissed', 'true');
-    }
-
+    // beforeinstallprompt ইভেন্ট (PWA ইনস্টল প্রম্পটের জন্য)
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        showInstallPrompt();
+        checkAndShowPrompt();
     });
 
+    // ইনস্টল বাটন
     installBtn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
+        if (!deferredPrompt) {
+            alert('ইনস্টল করতে আপনার ব্রাউজারের মেনু থেকে "Add to Home Screen" ব্যবহার করুন।');
+            return;
+        }
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
+            // ইন্সটল সফল হলে পপআপ বন্ধ, ভবিষ্যতে আর দেখাবে না (কুকি সেট করতে পারি, কিন্তু আনইন্সটলের পরে চাইলে পুনরায় দেখাবে)
             localStorage.setItem('pwaPromptInstalled', 'true');
-            localStorage.removeItem('pwaPromptDismissed');
-        } else {
-            dismissPrompt();
         }
         deferredPrompt = null;
         overlay.style.display = 'none';
     });
 
+    // ব্যাকড্রপ ট্যাপ করলে পপআপ ডিসমিস
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) dismissPrompt();
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+        }
     });
 
+    // অ্যাপ ইনস্টল হয়ে গেলে (ইভেন্ট)
     window.addEventListener('appinstalled', () => {
         localStorage.setItem('pwaPromptInstalled', 'true');
         overlay.style.display = 'none';
         deferredPrompt = null;
     });
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
+    // স্টেট চেক: প্রতিবার পেজ লোডে যদি অ্যাপ ইনস্টল না থাকে, তাহলে পপআপ রেডি
+    if (window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) {
         localStorage.setItem('pwaPromptInstalled', 'true');
+    } else {
+        // ইন্সটল না থাকলে আগের ফ্ল্যাগ সরিয়ে দেবো যাতে আবার দেখাতে পারে
+        localStorage.removeItem('pwaPromptInstalled');
     }
 
     // ========== ৬০টি প্রশ্ন ==========
